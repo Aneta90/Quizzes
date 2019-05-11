@@ -7,4 +7,6 @@ import pl.brainstorm.question.Domain.Entities.AuthorEntity;
 
 @Repository
 public interface AuthorRepository extends JpaRepository<AuthorEntity, Long> {
+
+    AuthorEntity findByEmail(String email);
 }

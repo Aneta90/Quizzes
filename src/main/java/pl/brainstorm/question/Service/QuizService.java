@@ -79,19 +79,36 @@ public class QuizService {
     }
 
     public List<Quiz> getListOfQuizesByName() {
-        return null;
+        List<QuizEntity> quizEntityList = quizRepository.findAllByName();
+        List<Quiz> quizList = new ArrayList<>();
+        for (QuizEntity quizEntity : quizEntityList) {
+            quizList.add(mappingService.map(quizEntity));
+        }
+        return quizList;
     }
 
-    public Quiz addQuiz(Quiz quiz) {
-        return null;
+    public Long addQuiz(Quiz quiz) {
+        return quizRepository.save(mappingService.map(quiz)).getId();
     }
 
     public Boolean removeQuize(Long id) {
-        return null;
+        List<QuizEntity> quizEntityList = quizRepository.findAllById(id);
+        if (quizEntityList.size() > 1 || quizEntityList.size() == 0) {
+            return false;
+            // do zastanowienia sie czy nie przejac to przy kontrolerze
+        }
+        quizRepository.delete(quizEntityList.get(0));
+        return true;
     }
 
-    public Quiz editQuiz(Quiz quiz) {
-        return null;
+    public Quiz editQuiz(Long id, Quiz quiz) {
+        QuizEntity quizEntity = quizRepository.getOne(id);
+        quizEntity.setName(quiz.getName());
+        quizEntity.setTotalScore(quiz.getTotalScore());
+        quizEntity.setSizeOfQuestionList(quiz.getSizeOfQuestionList());
+        quizEntity.setNumberOfSolved(quiz.getNumberOfSolved());
+        quizRepository.save(quizEntity);
+        return mappingService.map(quizEntity);
     }
 
     public Long findByNameAndReturnId(String quizName) {
@@ -99,6 +116,6 @@ public class QuizService {
         if (quizEntityList.size() > 1) {
             // do przemyslenia swoje zycie
         }
-      return quizEntityList.get(0).getId();
+        return quizEntityList.get(0).getId();
     }
 }
