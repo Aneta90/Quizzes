@@ -17,4 +17,7 @@ public interface QuestionsRepository extends JpaRepository<QuestionsEntity, Long
 
 
 
+
+
+
 }
