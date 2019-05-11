@@ -20,9 +20,8 @@ public class QuizEntity implements Serializable {
     @ManyToOne
     private AuthorEntity authorId;
 
-    @OneToMany(mappedBy = "questions")
-    private
-    List<QuestionsEntity> questionsList;
+    @OneToMany(mappedBy = "quizEntity")
+    private List<QuestionsEntity> questionsList;
 
     @Setter(AccessLevel.NONE)
     private List<Long> totalScore;

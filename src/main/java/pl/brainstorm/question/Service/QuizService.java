@@ -14,7 +14,6 @@ import java.util.List;
 public class QuizService {
 
 
-
     private final QuizRepository quizRepository;
     private final MappingService mappingService;
 
@@ -23,7 +22,6 @@ public class QuizService {
         this.quizRepository = quizRepository;
         this.mappingService = mappingService;
     }
-
 
 
     public List<Quiz> getListOfQuizes() {
@@ -36,7 +34,12 @@ public class QuizService {
     }
 
     public List<Quiz> getListOfQuizesByAuthorId(Long id) {
-        return null;
+        List<QuizEntity> quizEntityList = quizRepository.findAllByAuthorId(id);
+        List<Quiz> quizList = new ArrayList<>();
+        for (QuizEntity quizEntity : quizEntityList) {
+            quizList.add(mappingService.map(quizEntity));
+        }
+        return quizList;
     }
 
     public List<Quiz> getListOfQuizesWithNumberOfQuestionsGreatenThen(int numberOfQuestions) {

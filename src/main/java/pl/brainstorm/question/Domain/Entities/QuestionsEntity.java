@@ -15,7 +15,7 @@ public class QuestionsEntity implements Serializable {
     private QuizEntity quizEntity;
     private String content;
 
-    @OneToMany
+    @OneToMany(mappedBy = "questions")
     private List<ResponseEntity> responseEntityList;
 
 
