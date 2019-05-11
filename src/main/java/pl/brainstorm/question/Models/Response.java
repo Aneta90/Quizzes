@@ -4,7 +4,7 @@ import pl.brainstorm.question.Domain.Entities.QuestionsEntity;
 
 public class Response {
 
-    private QuestionsEntity questions;
+    private Question questions;
 
     private String answerA;
     private String answerB;
@@ -18,7 +18,7 @@ public class Response {
     public Response() {
     }
 
-    public Response(QuestionsEntity questions, String answerA, String answerB, String answerC, String answerD, Boolean isACorrect, Boolean isBCorrect, Boolean isCCorrect, Boolean isDCorrect) {
+    public Response(Question questions, String answerA, String answerB, String answerC, String answerD, Boolean isACorrect, Boolean isBCorrect, Boolean isCCorrect, Boolean isDCorrect) {
         this.questions = questions;
         this.answerA = answerA;
         this.answerB = answerB;
@@ -30,11 +30,11 @@ public class Response {
         this.isDCorrect = isDCorrect;
     }
 
-    public QuestionsEntity getQuestions() {
+    public Question getQuestions() {
         return questions;
     }
 
-    public void setQuestions(QuestionsEntity questions) {
+    public void setQuestions(Question questions) {
         this.questions = questions;
     }
 
