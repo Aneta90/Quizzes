@@ -1,6 +1,5 @@
 package pl.brainstorm.question.Models;
 
-import pl.brainstorm.question.Domain.Entities.QuestionsEntity;
 
 public class Response {
 
