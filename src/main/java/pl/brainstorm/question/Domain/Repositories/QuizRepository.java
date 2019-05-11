@@ -10,6 +10,16 @@ import java.util.List;
 @Repository
 public interface QuizRepository extends JpaRepository<QuizEntity, Long> {
 
-    List <QuizEntity> findAllByAuthorId(Long id);
+    List<QuizEntity> findAllByAuthorId(Long id);
+
+    List<QuizEntity> findAllBySizeOfQuestionListLessThanEqual(int size);
+
+    List<QuizEntity> findAllBySizeOfQuestionListGreaterThanEqual(int size);
+
+    List<QuizEntity> findAllByNumberOfSolvedGreaterThanEqual(int size);
+
+    List<QuizEntity> findAllByNumberOfSolvedLessThanEqual(int size);
+
+    List<QuizEntity> findByName(String name);
 
 }

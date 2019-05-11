@@ -26,14 +26,19 @@ public class QuizEntity implements Serializable {
     @Setter(AccessLevel.NONE)
     private List<Long> totalScore;
 
+    private int sizeOfQuestionList;
+    private int numberOfSolved;
     public QuizEntity() {
     }
 
-    public QuizEntity(String name, AuthorEntity authorId, List<QuestionsEntity> questionsList, List<Long> totalScore) {
+    public QuizEntity(String name, AuthorEntity authorId, List<QuestionsEntity> questionsList,
+                      List<Long> totalScore, int sizeOfQuestionList, int numberOfSolved) {
         this.name = name;
         this.authorId = authorId;
         this.questionsList = questionsList;
         this.totalScore = totalScore;
+        this.sizeOfQuestionList = sizeOfQuestionList;
+        this.numberOfSolved = numberOfSolved;
     }
 
     public Long getId() {
@@ -74,6 +79,22 @@ public class QuizEntity implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getSizeOfQuestionList() {
+        return sizeOfQuestionList;
+    }
+
+    public void setSizeOfQuestionList(int sizeOfQuestionList) {
+        this.sizeOfQuestionList = sizeOfQuestionList;
+    }
+
+    public int getNumberOfSolved() {
+        return numberOfSolved;
+    }
+
+    public void setNumberOfSolved(int numberOfSolved) {
+        this.numberOfSolved = numberOfSolved;
     }
 
     @Override

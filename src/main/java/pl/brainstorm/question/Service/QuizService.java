@@ -43,15 +43,39 @@ public class QuizService {
     }
 
     public List<Quiz> getListOfQuizesWithNumberOfQuestionsGreatenThen(int numberOfQuestions) {
-        return null;
+        List<QuizEntity> quizEntityList = quizRepository.findAllBySizeOfQuestionListGreaterThanEqual(numberOfQuestions);
+        List<Quiz> quizList = new ArrayList<>();
+        for (QuizEntity quizEntity : quizEntityList) {
+            quizList.add(mappingService.map(quizEntity));
+        }
+        return quizList;
     }
 
     public List<Quiz> getListOfQuizesWithNumberOfQuestionsLowerThen(int numberOfQuestions) {
-        return null;
+        List<QuizEntity> quizEntityList = quizRepository.findAllBySizeOfQuestionListLessThanEqual(numberOfQuestions);
+        List<Quiz> quizList = new ArrayList<>();
+        for (QuizEntity quizEntity : quizEntityList) {
+            quizList.add(mappingService.map(quizEntity));
+        }
+        return quizList;
     }
 
     public List<Quiz> getListOfQuizesSolvedMoreThen(int numberOfTries) {
-        return null;
+        List<QuizEntity> quizEntityList = quizRepository.findAllByNumberOfSolvedGreaterThanEqual(numberOfTries);
+        List<Quiz> quizList = new ArrayList<>();
+        for (QuizEntity quizEntity : quizEntityList) {
+            quizList.add(mappingService.map(quizEntity));
+        }
+        return quizList;
+    }
+
+    public List<Quiz> getListOfQuizesSolveLessThen(int numberOfTries) {
+        List<QuizEntity> quizEntityList = quizRepository.findAllByNumberOfSolvedLessThanEqual(numberOfTries);
+        List<Quiz> quizList = new ArrayList<>();
+        for (QuizEntity quizEntity : quizEntityList) {
+            quizList.add(mappingService.map(quizEntity));
+        }
+        return quizList;
     }
 
     public List<Quiz> getListOfQuizesByName() {
@@ -70,4 +94,11 @@ public class QuizService {
         return null;
     }
 
+    public Long findByNameAndReturnId(String quizName) {
+        List<QuizEntity> quizEntityList = quizRepository.findByName(quizName);
+        if (quizEntityList.size() > 1) {
+            // do przemyslenia swoje zycie
+        }
+      return quizEntityList.get(0).getId();
+    }
 }
