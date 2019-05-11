@@ -1,6 +1,7 @@
 package pl.brainstorm.question.Models;
 
 public class User {
+
     private Long totalScore;
 
     public User(Long totalScore) {

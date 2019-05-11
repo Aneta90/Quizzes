@@ -1,7 +1,10 @@
 package pl.brainstorm.question.Service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.brainstorm.question.Controllers.AuthorController;
 import pl.brainstorm.question.Domain.Repositories.AuthorRepository;
 import pl.brainstorm.question.Models.Author;
 
@@ -9,6 +12,8 @@ import java.util.List;
 
 @Service
 public class AuthorService {
+
+    private final static Logger logger = LoggerFactory.getLogger(AuthorController.class);
 
     private final AuthorRepository authorRepository;
 
