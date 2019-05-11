@@ -22,12 +22,12 @@ public class QuizEntity implements Serializable {
     List<QuestionsEntity> questionsList;
 
     @Setter(AccessLevel.NONE)
-    private Long totalScore;
+    private List<Long> totalScore;
 
     public QuizEntity() {
     }
 
-    public QuizEntity(AuthorEntity authorId, List<QuestionsEntity> questionsList, Long totalScore) {
+    public QuizEntity(AuthorEntity authorId, List<QuestionsEntity> questionsList, List<Long> totalScore) {
         this.authorId = authorId;
         this.questionsList = questionsList;
         this.totalScore = totalScore;
@@ -57,11 +57,11 @@ public class QuizEntity implements Serializable {
         this.questionsList = questionsList;
     }
 
-    public Long getTotalScore() {
+    public List<Long> getTotalScore() {
         return totalScore;
     }
 
-    public void setTotalScore(Long totalScore) {
+    public void setTotalScore(List<Long> totalScore) {
         this.totalScore = totalScore;
     }
 

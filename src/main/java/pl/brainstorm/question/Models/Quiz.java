@@ -7,12 +7,12 @@ public class Quiz {
 
     private Author author;
     private List<Question> questionsList;
-    private Long totalScore;
+    private List<Long> totalScore;
 
     public Quiz() {
     }
 
-    public Quiz(Author author, List<Question> questionsList, Long totalScore) {
+    public Quiz(Author author, List<Question> questionsList, List<Long> totalScore) {
         this.author = author;
         this.questionsList = questionsList;
         this.totalScore = totalScore;
@@ -34,11 +34,11 @@ public class Quiz {
         this.questionsList = questionsList;
     }
 
-    public Long getTotalScore() {
+    public List<Long> getTotalScore() {
         return totalScore;
     }
 
-    public void setTotalScore(Long totalScore) {
+    public void setTotalScore(List<Long> totalScore) {
         this.totalScore = totalScore;
     }
 
