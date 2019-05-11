@@ -1,33 +1,28 @@
 package pl.brainstorm.question.Models;
 
-import pl.brainstorm.question.Domain.Entities.QuizEntity;
-import pl.brainstorm.question.Domain.Entities.ResponseEntity;
-
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import java.util.List;
 
 public class Question {
 
-    private QuizEntity quizEntity;
+    private Quiz quiz;
     private String content;
-    private List<ResponseEntity> responseEntityList;
+    private List<Response> responseList;
 
     public Question() {
     }
 
-    public Question(QuizEntity quizEntity, String content, List<ResponseEntity> responseEntityList) {
-        this.quizEntity = quizEntity;
+    public Question(Quiz quiz, String content, List<Response> responseList) {
+        this.quiz = quiz;
         this.content = content;
-        this.responseEntityList = responseEntityList;
+        this.responseList = responseList;
     }
 
-    public QuizEntity getQuizEntity() {
-        return quizEntity;
+    public Quiz getQuiz() {
+        return quiz;
     }
 
-    public void setQuizEntity(QuizEntity quizEntity) {
-        this.quizEntity = quizEntity;
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
     }
 
     public String getContent() {
@@ -38,20 +33,20 @@ public class Question {
         this.content = content;
     }
 
-    public List<ResponseEntity> getResponseEntityList() {
-        return responseEntityList;
+    public List<Response> getResponseList() {
+        return responseList;
     }
 
-    public void setResponseEntityList(List<ResponseEntity> responseEntityList) {
-        this.responseEntityList = responseEntityList;
+    public void setResponseList(List<Response> responseList) {
+        this.responseList = responseList;
     }
 
     @Override
     public String toString() {
         return "Question{" +
-                "quizEntity=" + quizEntity +
+                "quiz=" + quiz +
                 ", content='" + content + '\'' +
-                ", responseEntityList=" + responseEntityList +
+                ", responseList=" + responseList +
                 '}';
     }
 }
