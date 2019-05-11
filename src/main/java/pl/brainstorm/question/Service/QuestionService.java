@@ -30,4 +30,27 @@ public class QuestionService {
         return null;
     }
 
+    Long addQuestion(Question question){ //zastanowić się jak dodać konkretne pytanie do konkretnego quizu
+    return null;
+    }
+
+    Boolean doesQuestionExist(Question question){
+        return null;
+    }
+
+
+    Question editQuestion(Long id,Question question){
+
+        return null;
+
+    }
+
+    Boolean removeQuestion(Long id){
+
+        return false;
+    }
+
+
+
+
 }
