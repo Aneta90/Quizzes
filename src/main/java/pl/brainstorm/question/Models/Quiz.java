@@ -6,14 +6,16 @@ public class Quiz {
 
 
     private Author author;
+    private String name;
     private List<Question> questionsList;
     private List<Long> totalScore;
 
     public Quiz() {
     }
 
-    public Quiz(Author author, List<Question> questionsList, List<Long> totalScore) {
+    public Quiz(Author author, String name, List<Question> questionsList, List<Long> totalScore) {
         this.author = author;
+        this.name = name;
         this.questionsList = questionsList;
         this.totalScore = totalScore;
     }
@@ -40,6 +42,14 @@ public class Quiz {
 
     public void setTotalScore(List<Long> totalScore) {
         this.totalScore = totalScore;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

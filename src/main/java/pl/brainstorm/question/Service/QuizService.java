@@ -4,6 +4,7 @@ package pl.brainstorm.question.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.brainstorm.question.Domain.Repositories.QuizRepository;
+import pl.brainstorm.question.Models.Question;
 import pl.brainstorm.question.Models.Quiz;
 
 import java.util.List;

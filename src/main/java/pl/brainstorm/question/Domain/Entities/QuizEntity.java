@@ -2,6 +2,7 @@ package pl.brainstorm.question.Domain.Entities;
 
 import lombok.AccessLevel;
 import lombok.Setter;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,6 +14,8 @@ public class QuizEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    private String name;
 
     @ManyToOne
     private AuthorEntity authorId;
@@ -27,7 +30,8 @@ public class QuizEntity implements Serializable {
     public QuizEntity() {
     }
 
-    public QuizEntity(AuthorEntity authorId, List<QuestionsEntity> questionsList, List<Long> totalScore) {
+    public QuizEntity(String name, AuthorEntity authorId, List<QuestionsEntity> questionsList, List<Long> totalScore) {
+        this.name = name;
         this.authorId = authorId;
         this.questionsList = questionsList;
         this.totalScore = totalScore;
@@ -63,6 +67,14 @@ public class QuizEntity implements Serializable {
 
     public void setTotalScore(List<Long> totalScore) {
         this.totalScore = totalScore;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
