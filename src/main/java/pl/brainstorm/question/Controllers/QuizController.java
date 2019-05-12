@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/quiz")
+@CrossOrigin
 public class QuizController {
 
     private final static Logger logger = LoggerFactory.getLogger(QuizController.class);
@@ -48,6 +49,16 @@ public class QuizController {
         return new ResponseEntity<>(quizList, HttpStatus.OK);
     }
 
+    @GetMapping("/SingleQuiz/{name}")
+    public ResponseEntity getSingleQuizWithGivenName(@PathVariable String name) {
+        Quiz quiz = quizService.getSingleQuizWithGivenName(name);
+        if (quiz == null) {
+            logger.info("There isn't any Quiz with name : {}", name);
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+        logger.info("Quiz with name : " + name + " \n Quiz : {}", quiz);
+        return new ResponseEntity<>(quiz, HttpStatus.OK);
+    }
 
     @GetMapping("/ListOfQuizzesWithQuestionsGreaterThen/{numberOfQuestions}")
     public ResponseEntity getListOfQuizzesWithNumberOfQuestionsGreaterThen(@PathVariable int numberOfQuestions) {
@@ -106,15 +117,15 @@ public class QuizController {
 
     @PostMapping("/addQuiz")
     public ResponseEntity addQuiz(@RequestBody Quiz quiz) {
-        Long id = quizService.findByNameAndReturnId(quiz.getName());
-        if (id != null) {
-            logger.info("There is quiz on database name like quiz you wan't to add, name : {}", quiz.getName());
+        Boolean isInDatabase = quizService.isQuizInDataBase(quiz);
+        if (isInDatabase) {
+            logger.info("There is quiz on database name like quiz you try to add, name : {}", quiz.getName());
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
         logger.info("Adding quiz : {}", quiz);
-        quizService.addQuiz(quiz);
+        Long id = quizService.addQuiz(quiz);
         logger.info("added quiz : {}", quiz);
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteQuiz/{id}")

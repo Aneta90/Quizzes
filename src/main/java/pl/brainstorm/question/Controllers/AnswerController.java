@@ -16,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/answers")
+@CrossOrigin
 public class AnswerController {
 
     private final static Logger logger = LoggerFactory.getLogger(AnswerController.class);

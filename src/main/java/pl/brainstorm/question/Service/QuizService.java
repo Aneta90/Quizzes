@@ -88,7 +88,6 @@ public class QuizService {
         return quizList;
     }
 
-
     public Long addQuiz(Quiz quiz) {
         return quizRepository.save(mappingService.map(quiz)).getId();
     }
@@ -119,5 +118,21 @@ public class QuizService {
             // do przemyslenia swoje zycie
         }
         return quizEntityList.get(0).getId();
+    }
+
+    public Boolean isQuizInDataBase(Quiz quiz) {
+        List<QuizEntity> quizEntityList = quizRepository.findByName(quiz.getName());
+        if (quizEntityList.size() != 1) {
+            return false;
+        }
+        return true;
+    }
+
+    public Quiz getSingleQuizWithGivenName(String name) {
+        List<QuizEntity> quizEntityList = quizRepository.findByName(name);
+        if (quizEntityList.size() != 1) {
+            return null;
+        }
+        return mappingService.map(quizEntityList.get(0));
     }
 }

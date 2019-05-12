@@ -5,7 +5,7 @@ import java.util.List;
 public class Quiz {
 
 
-    private Author author;
+
     private String name;
     private List<Question> questionsList;
     private List<Long> totalScore;
@@ -16,22 +16,13 @@ public class Quiz {
     }
 
 
-    public Quiz(Author author, String name, List<Question> questionsList,
+    public Quiz( String name, List<Question> questionsList,
                 List<Long> totalScore, int sizeOfQuestionList, int numberOfSolved) {
-        this.author = author;
         this.name = name;
         this.questionsList = questionsList;
         this.totalScore = totalScore;
         this.sizeOfQuestionList = sizeOfQuestionList;
         this.numberOfSolved = numberOfSolved;
-    }
-
-    public Author getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Author author) {
-        this.author = author;
     }
 
     public List<Question> getQuestionsList() {
@@ -77,7 +68,6 @@ public class Quiz {
     @Override
     public String toString() {
         return "Quiz{" +
-                "author=" + author +
                 ", questionsList=" + questionsList +
                 ", totalScore=" + totalScore +
                 '}';

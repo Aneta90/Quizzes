@@ -4,25 +4,16 @@ import java.util.List;
 
 public class Question {
 
-    private Quiz quiz;
+
     private String content;
     private List<Answer> answerList;
 
     public Question() {
     }
 
-    public Question(Quiz quiz, String content, List<Answer> answerList) {
-        this.quiz = quiz;
+    public Question( String content, List<Answer> answerList) {
         this.content = content;
         this.answerList = answerList;
-    }
-
-    public Quiz getQuiz() {
-        return quiz;
-    }
-
-    public void setQuiz(Quiz quiz) {
-        this.quiz = quiz;
     }
 
     public String getContent() {
@@ -44,7 +35,6 @@ public class Question {
     @Override
     public String toString() {
         return "Question{" +
-                "quiz=" + quiz +
                 ", content='" + content + '\'' +
                 ", answerList=" + answerList +
                 '}';

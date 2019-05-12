@@ -12,8 +12,6 @@ public class AnswerEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-
-
     private String answerA;
     private String answerB;
     private String answerC;

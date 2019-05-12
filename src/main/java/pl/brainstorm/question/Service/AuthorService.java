@@ -80,7 +80,7 @@ public class AuthorService {
         if (authorEntity != null) {
             return true;
         }
-return false;
+        return false;
     }
 
     public Boolean isAuthorWithEmailInDatabase(String email) {

@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/author")
+@CrossOrigin
 public class AuthorController {
 
     private final static Logger logger = LoggerFactory.getLogger(AuthorController.class);

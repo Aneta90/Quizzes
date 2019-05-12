@@ -88,6 +88,7 @@ public class MappingService {
 
     public QuizEntity map(Quiz quiz) {
         QuizEntity quizEntity = new QuizEntity();
+        quizEntity.setName(quiz.getName());
         quizEntity.setTotalScore(quiz.getTotalScore());
         quizEntity.setSizeOfQuestionList(quiz.getSizeOfQuestionList());
         quizEntity.setNumberOfSolved(quiz.getNumberOfSolved());

@@ -3,7 +3,6 @@ package pl.brainstorm.question.Models;
 
 public class Answer {
 
-    private Question questions;
 
     private String answerA;
     private String answerB;
@@ -17,8 +16,8 @@ public class Answer {
     public Answer() {
     }
 
-    public Answer(Question questions, String answerA, String answerB, String answerC, String answerD, Boolean isACorrect, Boolean isBCorrect, Boolean isCCorrect, Boolean isDCorrect) {
-        this.questions = questions;
+    public Answer(String answerA, String answerB, String answerC, String answerD, Boolean isACorrect, Boolean isBCorrect, Boolean isCCorrect, Boolean isDCorrect) {
+
         this.answerA = answerA;
         this.answerB = answerB;
         this.answerC = answerC;
@@ -29,13 +28,6 @@ public class Answer {
         this.isDCorrect = isDCorrect;
     }
 
-    public Question getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(Question questions) {
-        this.questions = questions;
-    }
 
     public String getAnswerA() {
         return answerA;
@@ -104,7 +96,6 @@ public class Answer {
     @Override
     public String toString() {
         return "Answer{" +
-                "questions=" + questions +
                 ", answerA='" + answerA + '\'' +
                 ", answerB='" + answerB + '\'' +
                 ", answerC='" + answerC + '\'' +
