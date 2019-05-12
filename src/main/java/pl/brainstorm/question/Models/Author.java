@@ -8,12 +8,12 @@ public class Author {
     private String name;
     private String surname;
     private String email;
-    private List<Question> quizList;
+    private List<Quiz> quizList;
 
     public Author() {
     }
 
-    public Author(Long id, String name, String surname, String email, List<Question> quizList) {
+    public Author(Long id, String name, String surname, String email, List<Quiz> quizList) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -54,11 +54,11 @@ public class Author {
         this.email = email;
     }
 
-    public List<Question> getQuizList() {
+    public List<Quiz> getQuizList() {
         return quizList;
     }
 
-    public void setQuizList(List<Question> quizList) {
+    public void setQuizList(List<Quiz> quizList) {
         this.quizList = quizList;
     }
 

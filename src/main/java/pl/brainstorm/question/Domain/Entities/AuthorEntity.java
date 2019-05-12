@@ -61,6 +61,14 @@ public class AuthorEntity implements Serializable {
         this.email = email;
     }
 
+    public List<QuizEntity> getQuizEntityList() {
+        return quizEntityList;
+    }
+
+    public void setQuizEntityList(List<QuizEntity> quizEntityList) {
+        this.quizEntityList = quizEntityList;
+    }
+
     @Override
     public String toString() {
         return "AuthorEntity{" +
