@@ -6,18 +6,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.brainstorm.question.Service.ResponseService;
+import pl.brainstorm.question.Service.AnswerService;
 
 @RestController
 @RequestMapping("/Response")
-public class ResponseController {
+public class AnswerController {
 
     private final static Logger logger = LoggerFactory.getLogger(AuthorController.class);
 
-    private final ResponseService responseService;
+    private final AnswerService answerService;
 
     @Autowired
-    public ResponseController(ResponseService responseService) {
-        this.responseService = responseService;
+    public AnswerController(AnswerService answerService) {
+        this.answerService = answerService;
     }
 }

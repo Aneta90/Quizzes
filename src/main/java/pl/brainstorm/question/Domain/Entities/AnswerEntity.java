@@ -1,9 +1,19 @@
-package pl.brainstorm.question.Models;
+package pl.brainstorm.question.Domain.Entities;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 
-public class Response {
+@Table(name = "Answer")
+@Entity
+public class AnswerEntity implements Serializable {
 
-    private Question questions;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id;
+
+    @ManyToOne
+    private QuestionsEntity questions;
 
     private String answerA;
     private String answerB;
@@ -14,10 +24,12 @@ public class Response {
     private Boolean isCCorrect;
     private Boolean isDCorrect;
 
-    public Response() {
+    public AnswerEntity() {
     }
 
-    public Response(Question questions, String answerA, String answerB, String answerC, String answerD, Boolean isACorrect, Boolean isBCorrect, Boolean isCCorrect, Boolean isDCorrect) {
+    public AnswerEntity(QuestionsEntity questions, String answerA, String answerB, String answerC,
+                        String answerD, Boolean isACorrect, Boolean isBCorrect, Boolean isCCorrect,
+                        Boolean isDCorrect) {
         this.questions = questions;
         this.answerA = answerA;
         this.answerB = answerB;
@@ -29,11 +41,19 @@ public class Response {
         this.isDCorrect = isDCorrect;
     }
 
-    public Question getQuestions() {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public QuestionsEntity getQuestions() {
         return questions;
     }
 
-    public void setQuestions(Question questions) {
+    public void setQuestions(QuestionsEntity questions) {
         this.questions = questions;
     }
 
@@ -103,8 +123,9 @@ public class Response {
 
     @Override
     public String toString() {
-        return "Response{" +
-                "questions=" + questions +
+        return "AnswerEntity{" +
+                "id=" + id +
+                ", questions=" + questions +
                 ", answerA='" + answerA + '\'' +
                 ", answerB='" + answerB + '\'' +
                 ", answerC='" + answerC + '\'' +

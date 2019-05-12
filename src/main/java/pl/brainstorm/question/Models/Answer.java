@@ -1,19 +1,9 @@
-package pl.brainstorm.question.Domain.Entities;
-
-import javax.persistence.*;
-import java.io.Serializable;
+package pl.brainstorm.question.Models;
 
 
-@Table(name = "Response")
-@Entity
-public class ResponseEntity implements Serializable {
+public class Answer {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
-
-    @ManyToOne
-    private QuestionsEntity questions;
+    private Question questions;
 
     private String answerA;
     private String answerB;
@@ -24,12 +14,10 @@ public class ResponseEntity implements Serializable {
     private Boolean isCCorrect;
     private Boolean isDCorrect;
 
-    public ResponseEntity() {
+    public Answer() {
     }
 
-    public ResponseEntity(QuestionsEntity questions, String answerA, String answerB, String answerC,
-                          String answerD, Boolean isACorrect, Boolean isBCorrect, Boolean isCCorrect,
-                          Boolean isDCorrect) {
+    public Answer(Question questions, String answerA, String answerB, String answerC, String answerD, Boolean isACorrect, Boolean isBCorrect, Boolean isCCorrect, Boolean isDCorrect) {
         this.questions = questions;
         this.answerA = answerA;
         this.answerB = answerB;
@@ -41,19 +29,11 @@ public class ResponseEntity implements Serializable {
         this.isDCorrect = isDCorrect;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public QuestionsEntity getQuestions() {
+    public Question getQuestions() {
         return questions;
     }
 
-    public void setQuestions(QuestionsEntity questions) {
+    public void setQuestions(Question questions) {
         this.questions = questions;
     }
 
@@ -123,9 +103,8 @@ public class ResponseEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "ResponseEntity{" +
-                "id=" + id +
-                ", questions=" + questions +
+        return "Answer{" +
+                "questions=" + questions +
                 ", answerA='" + answerA + '\'' +
                 ", answerB='" + answerB + '\'' +
                 ", answerC='" + answerC + '\'' +

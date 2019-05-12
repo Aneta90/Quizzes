@@ -2,14 +2,14 @@ package pl.brainstorm.question.Service;
 
 
 import org.springframework.stereotype.Service;
+import pl.brainstorm.question.Domain.Entities.AnswerEntity;
 import pl.brainstorm.question.Domain.Entities.AuthorEntity;
 import pl.brainstorm.question.Domain.Entities.QuestionsEntity;
 import pl.brainstorm.question.Domain.Entities.QuizEntity;
-import pl.brainstorm.question.Domain.Entities.ResponseEntity;
+import pl.brainstorm.question.Models.Answer;
 import pl.brainstorm.question.Models.Author;
 import pl.brainstorm.question.Models.Question;
 import pl.brainstorm.question.Models.Quiz;
-import pl.brainstorm.question.Models.Response;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,11 +51,11 @@ public class MappingService {
         question.setContent(questionsEntity.getContent());
         question.setQuiz(map(questionsEntity.getQuizEntity()));
 
-        List<Response> responseList = new ArrayList<>();
-        for (int i = 0; i < questionsEntity.getResponseEntityList().size(); i++) {
-            responseList.add(map(questionsEntity.getResponseEntityList().get(i)));
+        List<Answer> answerList = new ArrayList<>();
+        for (int i = 0; i < questionsEntity.getAnswerEntityList().size(); i++) {
+            answerList.add(map(questionsEntity.getAnswerEntityList().get(i)));
         }
-        question.setResponseList(responseList);
+        question.setAnswerList(answerList);
         return question;
     }
 
@@ -64,11 +64,11 @@ public class MappingService {
         questionsEntity.setContent(question.getContent());
         questionsEntity.setQuizEntity(map(question.getQuiz()));
 
-        List<ResponseEntity> responseEntityList = new ArrayList<>();
-        for (int i = 0; i < question.getResponseList().size(); i++) {
-            responseEntityList.add(map(question.getResponseList().get(i)));
+        List<AnswerEntity> answerEntityList = new ArrayList<>();
+        for (int i = 0; i < question.getAnswerList().size(); i++) {
+            answerEntityList.add(map(question.getAnswerList().get(i)));
         }
-        questionsEntity.setResponseEntityList(responseEntityList);
+        questionsEntity.setAnswerEntityList(answerEntityList);
         return questionsEntity;
     }
 
@@ -105,21 +105,21 @@ public class MappingService {
         return quizEntity;
     }
 
-    public Response map(ResponseEntity responseEntity) {
-        Response response = new Response();
-        response.setAnswerA(responseEntity.getAnswerA());
-        response.setAnswerB(responseEntity.getAnswerB());
-        response.setAnswerC(responseEntity.getAnswerC());
-        response.setAnswerD(responseEntity.getAnswerD());
-        response.setACorrect(responseEntity.getACorrect());
-        response.setBCorrect(responseEntity.getBCorrect());
-        response.setCCorrect(responseEntity.getCCorrect());
-        response.setDCorrect(responseEntity.getDCorrect());
-        response.setQuestions(map(responseEntity.getQuestions()));
-        return response;
+    public Answer map(AnswerEntity answerEntity) {
+        Answer answer = new Answer();
+        answer.setAnswerA(answerEntity.getAnswerA());
+        answer.setAnswerB(answerEntity.getAnswerB());
+        answer.setAnswerC(answerEntity.getAnswerC());
+        answer.setAnswerD(answerEntity.getAnswerD());
+        answer.setACorrect(answerEntity.getACorrect());
+        answer.setBCorrect(answerEntity.getBCorrect());
+        answer.setCCorrect(answerEntity.getCCorrect());
+        answer.setDCorrect(answerEntity.getDCorrect());
+        answer.setQuestions(map(answerEntity.getQuestions()));
+        return answer;
     }
 
-    public ResponseEntity map(Response response) {
+    public AnswerEntity map(Answer answer) {
         return null;
     }
 

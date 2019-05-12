@@ -6,15 +6,15 @@ public class Question {
 
     private Quiz quiz;
     private String content;
-    private List<Response> responseList;
+    private List<Answer> answerList;
 
     public Question() {
     }
 
-    public Question(Quiz quiz, String content, List<Response> responseList) {
+    public Question(Quiz quiz, String content, List<Answer> answerList) {
         this.quiz = quiz;
         this.content = content;
-        this.responseList = responseList;
+        this.answerList = answerList;
     }
 
     public Quiz getQuiz() {
@@ -33,12 +33,12 @@ public class Question {
         this.content = content;
     }
 
-    public List<Response> getResponseList() {
-        return responseList;
+    public List<Answer> getAnswerList() {
+        return answerList;
     }
 
-    public void setResponseList(List<Response> responseList) {
-        this.responseList = responseList;
+    public void setAnswerList(List<Answer> answerList) {
+        this.answerList = answerList;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class Question {
         return "Question{" +
                 "quiz=" + quiz +
                 ", content='" + content + '\'' +
-                ", responseList=" + responseList +
+                ", answerList=" + answerList +
                 '}';
     }
 }

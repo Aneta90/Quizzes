@@ -16,16 +16,16 @@ public class QuestionsEntity implements Serializable {
     private String content;
 
     @OneToMany(mappedBy = "questions")
-    private List<ResponseEntity> responseEntityList;
+    private List<AnswerEntity> answerEntityList;
 
 
     public QuestionsEntity() {
     }
 
-    public QuestionsEntity(QuizEntity quizEntity, String content, List<ResponseEntity> responseEntityList) {
+    public QuestionsEntity(QuizEntity quizEntity, String content, List<AnswerEntity> answerEntityList) {
         this.quizEntity = quizEntity;
         this.content = content;
-        this.responseEntityList = responseEntityList;
+        this.answerEntityList = answerEntityList;
     }
 
     public Long getId() {
@@ -52,12 +52,12 @@ public class QuestionsEntity implements Serializable {
         this.content = content;
     }
 
-    public List<ResponseEntity> getResponseEntityList() {
-        return responseEntityList;
+    public List<AnswerEntity> getAnswerEntityList() {
+        return answerEntityList;
     }
 
-    public void setResponseEntityList(List<ResponseEntity> responseEntityList) {
-        this.responseEntityList = responseEntityList;
+    public void setAnswerEntityList(List<AnswerEntity> answerEntityList) {
+        this.answerEntityList = answerEntityList;
     }
 
     @Override
@@ -66,7 +66,7 @@ public class QuestionsEntity implements Serializable {
                 "id=" + id +
                 ", quizEntity=" + quizEntity +
                 ", content='" + content + '\'' +
-                ", responseEntityList=" + responseEntityList +
+                ", answerEntityList=" + answerEntityList +
                 '}';
     }
 }

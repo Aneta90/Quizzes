@@ -30,8 +30,6 @@ public class AuthorService {
         return authorsList;
     }
 
-
-
     public Long saveAuthor(Author author) {
         return authorRepository.save(mappingService.map(author)).getId();
     }
