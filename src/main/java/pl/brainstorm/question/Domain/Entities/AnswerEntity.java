@@ -12,8 +12,7 @@ public class AnswerEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @ManyToOne
-    private QuestionsEntity questions;
+
 
     private String answerA;
     private String answerB;
@@ -27,10 +26,9 @@ public class AnswerEntity implements Serializable {
     public AnswerEntity() {
     }
 
-    public AnswerEntity(QuestionsEntity questions, String answerA, String answerB, String answerC,
+    public AnswerEntity( String answerA, String answerB, String answerC,
                         String answerD, Boolean isACorrect, Boolean isBCorrect, Boolean isCCorrect,
                         Boolean isDCorrect) {
-        this.questions = questions;
         this.answerA = answerA;
         this.answerB = answerB;
         this.answerC = answerC;
@@ -47,14 +45,6 @@ public class AnswerEntity implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public QuestionsEntity getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(QuestionsEntity questions) {
-        this.questions = questions;
     }
 
     public String getAnswerA() {
@@ -125,7 +115,7 @@ public class AnswerEntity implements Serializable {
     public String toString() {
         return "AnswerEntity{" +
                 "id=" + id +
-                ", questions=" + questions +
+
                 ", answerA='" + answerA + '\'' +
                 ", answerB='" + answerB + '\'' +
                 ", answerC='" + answerC + '\'' +

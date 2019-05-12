@@ -17,10 +17,7 @@ public class QuizEntity implements Serializable {
 
     private String name;
 
-    @ManyToOne
-    private AuthorEntity authorId;
-
-    @OneToMany(mappedBy = "quizEntity")
+    @OneToMany
     private List<QuestionsEntity> questionsList;
 
     @Setter(AccessLevel.NONE)
@@ -32,10 +29,9 @@ public class QuizEntity implements Serializable {
     public QuizEntity() {
     }
 
-    public QuizEntity(String name, AuthorEntity authorId, List<QuestionsEntity> questionsList,
+    public QuizEntity(String name, List<QuestionsEntity> questionsList,
                       List<Long> totalScore, int sizeOfQuestionList, int numberOfSolved) {
         this.name = name;
-        this.authorId = authorId;
         this.questionsList = questionsList;
         this.totalScore = totalScore;
         this.sizeOfQuestionList = sizeOfQuestionList;
@@ -48,14 +44,6 @@ public class QuizEntity implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public AuthorEntity getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthorId(AuthorEntity authorId) {
-        this.authorId = authorId;
     }
 
     public List<QuestionsEntity> getQuestionsList() {
@@ -102,7 +90,6 @@ public class QuizEntity implements Serializable {
     public String toString() {
         return "QuizEntity{" +
                 "id=" + id +
-                ", authorId=" + authorId +
                 ", questionsList=" + questionsList +
                 ", totalScore=" + totalScore +
                 '}';

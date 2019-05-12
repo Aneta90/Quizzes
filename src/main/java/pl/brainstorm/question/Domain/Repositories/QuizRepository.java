@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 public interface QuizRepository extends JpaRepository<QuizEntity, Long> {
-
+    @Query("select a.quizEntityList from AuthorEntity a where  a.id = ?1")
     List<QuizEntity> findAllByAuthorId(Long id);
 
     List<QuizEntity> findAllBySizeOfQuestionListLessThanEqual(int size);

@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface QuestionsRepository extends JpaRepository<QuestionsEntity, Long> {
 
-    @Query("Select q from QuestionsEntity q where q.quizEntity.id = ?1")
+    @Query("Select q.questionsList from QuizEntity q where q.id = ?1")
     List<QuestionsEntity> findAllQuestionsByQuizId (Long id);
 
 

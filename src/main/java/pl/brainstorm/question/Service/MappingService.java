@@ -49,7 +49,6 @@ public class MappingService {
     public Question map(QuestionsEntity questionsEntity) {
         Question question = new Question();
         question.setContent(questionsEntity.getContent());
-        question.setQuiz(map(questionsEntity.getQuizEntity()));
 
         List<Answer> answerList = new ArrayList<>();
         for (int i = 0; i < questionsEntity.getAnswerEntityList().size(); i++) {
@@ -62,7 +61,6 @@ public class MappingService {
     public QuestionsEntity map(Question question) {
         QuestionsEntity questionsEntity = new QuestionsEntity();
         questionsEntity.setContent(question.getContent());
-        questionsEntity.setQuizEntity(map(question.getQuiz()));
 
         List<AnswerEntity> answerEntityList = new ArrayList<>();
         for (int i = 0; i < question.getAnswerList().size(); i++) {
@@ -74,7 +72,6 @@ public class MappingService {
 
     public Quiz map(QuizEntity quizEntity) {
         Quiz quiz = new Quiz();
-        quiz.setAuthor(map(quizEntity.getAuthorId()));
         quiz.setName(quizEntity.getName());
         quiz.setNumberOfSolved(quizEntity.getNumberOfSolved());
         quiz.setSizeOfQuestionList(quizEntity.getSizeOfQuestionList());
@@ -94,7 +91,6 @@ public class MappingService {
         quizEntity.setTotalScore(quiz.getTotalScore());
         quizEntity.setSizeOfQuestionList(quiz.getSizeOfQuestionList());
         quizEntity.setNumberOfSolved(quiz.getNumberOfSolved());
-        quizEntity.setAuthorId(map(quiz.getAuthor()));
 
         List<QuestionsEntity> questionsEntityList = new ArrayList<>();
         for (int i = 0; i < quiz.getQuestionsList().size(); i++) {
@@ -115,7 +111,6 @@ public class MappingService {
         answer.setBCorrect(answerEntity.getBCorrect());
         answer.setCCorrect(answerEntity.getCCorrect());
         answer.setDCorrect(answerEntity.getDCorrect());
-        answer.setQuestions(map(answerEntity.getQuestions()));
         return answer;
     }
 

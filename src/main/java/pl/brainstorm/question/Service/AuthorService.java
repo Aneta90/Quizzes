@@ -77,7 +77,10 @@ public class AuthorService {
 
     public Boolean isAuthorInDatabase(Author author) {
         AuthorEntity authorEntity = authorRepository.findByEmail(author.getEmail());
-        return authorRepository.existsById(authorEntity.getId());
+        if (authorEntity != null) {
+            return true;
+        }
+return false;
     }
 
     public Boolean isAuthorWithEmailInDatabase(String email) {

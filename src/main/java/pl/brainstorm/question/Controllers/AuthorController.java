@@ -36,16 +36,17 @@ public class AuthorController {
         return new ResponseEntity<>(authorList, HttpStatus.OK);
     }
 
-    @PostMapping("/addAuthor")
+    @PostMapping("/add")
     public ResponseEntity saveAuthor(@RequestBody Author author) {
         logger.info("Adding new author : {}", author);
         if (authorService.isAuthorInDatabase(author)) {
             logger.info("There is {} in database.", author);
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
-        authorService.saveAuthor(author);
+       Long id= authorService.saveAuthor(author);
         logger.info("Added author {}.", author);
-        return new ResponseEntity<>(author, HttpStatus.OK);
+
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
     @GetMapping("/QuizzesGreaterThen/{numberOfQuizzes}")

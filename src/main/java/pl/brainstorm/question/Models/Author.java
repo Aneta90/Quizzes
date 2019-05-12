@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Author {
 
-    private Long id;
+    private Long id; // do poprawy
     private String name;
     private String surname;
     private String email;

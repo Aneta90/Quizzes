@@ -17,7 +17,7 @@ public class AuthorEntity implements Serializable {
     @Email
     private String email;
 
-    @OneToMany(mappedBy = "authorId", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List <QuizEntity> quizEntityList;
     private Long quizListSize;
     public AuthorEntity() {

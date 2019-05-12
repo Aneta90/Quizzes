@@ -11,19 +11,17 @@ public class QuestionsEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ManyToOne
-    private QuizEntity quizEntity;
+
     private String content;
 
-    @OneToMany(mappedBy = "questions")
+    @OneToMany
     private List<AnswerEntity> answerEntityList;
 
 
     public QuestionsEntity() {
     }
 
-    public QuestionsEntity(QuizEntity quizEntity, String content, List<AnswerEntity> answerEntityList) {
-        this.quizEntity = quizEntity;
+    public QuestionsEntity( String content, List<AnswerEntity> answerEntityList) {
         this.content = content;
         this.answerEntityList = answerEntityList;
     }
@@ -34,14 +32,6 @@ public class QuestionsEntity implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public QuizEntity getQuizEntity() {
-        return quizEntity;
-    }
-
-    public void setQuizEntity(QuizEntity quizEntity) {
-        this.quizEntity = quizEntity;
     }
 
     public String getContent() {
@@ -64,7 +54,7 @@ public class QuestionsEntity implements Serializable {
     public String toString() {
         return "QuestionsEntity{" +
                 "id=" + id +
-                ", quizEntity=" + quizEntity +
+
                 ", content='" + content + '\'' +
                 ", answerEntityList=" + answerEntityList +
                 '}';
