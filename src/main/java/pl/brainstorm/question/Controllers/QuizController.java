@@ -49,7 +49,7 @@ public class QuizController {
         return new ResponseEntity<>(quizList, HttpStatus.OK);
     }
 
-    @GetMapping("/SingleQuiz/{name}")
+    @GetMapping("/singleQuiz/{name}")
     public ResponseEntity getSingleQuizWithGivenName(@PathVariable String name) {
         Quiz quiz = quizService.getSingleQuizWithGivenName(name);
         if (quiz == null) {
@@ -60,7 +60,7 @@ public class QuizController {
         return new ResponseEntity<>(quiz, HttpStatus.OK);
     }
 
-    @GetMapping("/ListOfQuizzesWithQuestionsGreaterThen/{numberOfQuestions}")
+    @GetMapping("/listOfQuizzesWithQuestionsGreaterThen/{numberOfQuestions}")
     public ResponseEntity getListOfQuizzesWithNumberOfQuestionsGreaterThen(@PathVariable int numberOfQuestions) {
         List<Quiz> quizList = quizService.getListOfQuizzesWithNumberOfQuestionsGreaterThen(numberOfQuestions);
         if (quizList.isEmpty()) {
@@ -71,7 +71,7 @@ public class QuizController {
         return new ResponseEntity<>(quizList, HttpStatus.OK);
     }
 
-    @GetMapping("/ListOfQuizzesWithQuestionsLessThen/{numberOfQuestions}")
+    @GetMapping("/listOfQuizzesWithQuestionsLessThen/{numberOfQuestions}")
     public ResponseEntity getListOfQuizzesWithNumberOfQuestionsLowerThen(@PathVariable int numberOfQuestions) {
         List<Quiz> quizList = quizService.getListOfQuizzesWithNumberOfQuestionsLowerThen(numberOfQuestions);
         if (quizList.isEmpty()) {
@@ -104,7 +104,7 @@ public class QuizController {
         return new ResponseEntity<>(quizList, HttpStatus.OK);
     }
 
-    @GetMapping("/ListOfQuizzesSorted")
+    @GetMapping("/listOfQuizzesSorted")
     public ResponseEntity getListOfQuizzesByName() {
         List<Quiz> quizList = quizService.getListOfQuizzesByName();
         if (quizList.isEmpty()) {
@@ -139,7 +139,7 @@ public class QuizController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @PutMapping("/EditQuiz/{id}")
+    @PutMapping("/editQuiz/{id}")
     public ResponseEntity editQuiz(@RequestBody Quiz quiz, @PathVariable Long id) {
         Quiz quiz1 = quizService.editQuiz(id, quiz);
         if (!quiz.equals(quiz1)) {

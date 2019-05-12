@@ -29,66 +29,66 @@ public class QuestionsController {
     }
 
     @GetMapping("/questionsList")
-    public ResponseEntity questionsList(){
+    public ResponseEntity questionsList() {
 
         List<Question> questionsList = questionService.getListOfQuestions();
-        if(questionsList.isEmpty()){
+        if (questionsList.isEmpty()) {
             logger.warn("Base is empty. Firstly, add some questions.");
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
         logger.info("List of all questions");
-        return new ResponseEntity<>(questionsList,HttpStatus.OK);
+        return new ResponseEntity<>(questionsList, HttpStatus.OK);
     }
 
     @GetMapping("/questionsListInGivenQuiz/{id}")
-    public ResponseEntity questionsListInGivenQuizById(@PathVariable Long id){
+    public ResponseEntity questionsListInGivenQuizById(@PathVariable Long id) {
 
         List<Question> questionList = questionService.getListOfQuestionsInGivenQuizById(id);
-        if(questionList.isEmpty()){
+        if (questionList.isEmpty()) {
             logger.info("There are no questions for given quiz. Firstly, add quiz with given id or add questions to empty quiz!");
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
 
         logger.info("List of all questions");
-        return new ResponseEntity<>(questionList,HttpStatus.OK);
+        return new ResponseEntity<>(questionList, HttpStatus.OK);
     }
 
     @GetMapping("/questionsListInGivenQuiz/{name}")
-    public ResponseEntity questionsListInGivenQuizByName(@PathVariable String name){
+    public ResponseEntity questionsListInGivenQuizByName(@PathVariable String name) {
 
         List<Question> questionList = questionService.getListOfQuestionsinGivenQuizByName(name);
-        if(questionList.isEmpty()){
+        if (questionList.isEmpty()) {
             logger.info("There are no questions for given quiz. Firstly, add quiz with given name or add questions to empty quiz!");
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
 
         logger.info("List of all questions");
-        return new ResponseEntity<>(questionList,HttpStatus.OK);
+        return new ResponseEntity<>(questionList, HttpStatus.OK);
     }
 
-     @PostMapping("/addQuestion")
-     public ResponseEntity<?> addQuestion(@RequestBody Question question){
+    @PostMapping("/addQuestion")
+    public ResponseEntity<?> addQuestion(@RequestBody Question question) {
 
-        logger.info("Adding question: {}",question);
-        if(questionService.doesQuestionExist(question)){
+        logger.info("Adding question: {}", question);
+        if (questionService.doesQuestionExist(question)) {
             logger.warn("There is exactly the same question in our database!.Question : {}", question);
-            return new ResponseEntity<>(String.valueOf(new CustomError("Unable to create question. Question" + question + "already exists")),HttpStatus.CONFLICT);
+            return new ResponseEntity<>(String.valueOf(new CustomError("Unable to create question. Question" + question + "already exists")), HttpStatus.CONFLICT);
         }
         Long createdAnswerId = questionService.addQuestion(question);
         return new ResponseEntity<>(createdAnswerId, HttpStatus.CREATED);
-     }
+    }
 
-     @PutMapping("/editQuestion/{id}")
-    public ResponseEntity editQuestion(@RequestBody Question question, @PathVariable Long id){
+    @PutMapping("/editQuestion/{id}")
+    public ResponseEntity editQuestion(@RequestBody Question question, @PathVariable Long id) {
 
         logger.info("Edit question with id[}", id);
-        Question question1 = questionService.editQuestion(id,question);
-        if(question1 == null){
+        Question question1 = questionService.editQuestion(id, question);
+        if (question1 == null) {
             logger.error("Something went wrong. You can not edit the question.");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(question1,HttpStatus.UPGRADE_REQUIRED);
-     }
+        return new ResponseEntity<>(question1, HttpStatus.UPGRADE_REQUIRED);
+    }
 
     @DeleteMapping("/removeQuestion/{id}")
     public ResponseEntity<Boolean> removeQuestion(@PathVariable Long id) {

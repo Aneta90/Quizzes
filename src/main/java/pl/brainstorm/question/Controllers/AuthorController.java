@@ -26,7 +26,7 @@ public class AuthorController {
     }
 
 
-    @GetMapping("/ListOfAuthor")
+    @GetMapping("/listOfAuthor")
     public ResponseEntity listOfAllAuthor() {
         List<Author> authorList = authorService.getListOfAuthor();
         if (authorList.isEmpty()) {
@@ -44,13 +44,13 @@ public class AuthorController {
             logger.info("There is {} in database.", author);
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
-       Long id= authorService.saveAuthor(author);
+        Long id = authorService.saveAuthor(author);
         logger.info("Added author {}.", author);
 
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
-    @GetMapping("/QuizzesGreaterThen/{numberOfQuizzes}")
+    @GetMapping("/authorsNumberQuizzesGreaterThen/{numberOfQuizzes}")
     public ResponseEntity findAuthorsWithNumberOfQuizzesGreaterThen(@PathVariable int numberOfQuizzes) {
         List<Author> authorList = authorService.findAuthorsWithNumberOfQuizzesGreaterThen(numberOfQuizzes);
         if (authorList.isEmpty()) {
@@ -61,7 +61,7 @@ public class AuthorController {
         return new ResponseEntity<>(authorList, HttpStatus.OK);
     }
 
-    @GetMapping("/QuizzesLessThen/{numberOfQuizzes}")
+    @GetMapping("/authorsNumberQuizzesLessThen/{numberOfQuizzes}")
     public ResponseEntity findAuthorsWithNumberOfQuizzesLowerThen(@PathVariable int numberOfQuizzes) {
         List<Author> authorList = authorService.findAuthorsWithNumberOfQuizzesLowerThen(numberOfQuizzes);
         if (authorList.isEmpty()) {
@@ -108,7 +108,7 @@ public class AuthorController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @PutMapping("/EditAuthor/{id}")
+    @PutMapping("/editAuthor/{id}")
     public ResponseEntity editAuthor(@RequestBody Author author, @PathVariable Long id) {
         Author author1 = authorService.editAuthor(author, id);
         if (author1 == null) {
