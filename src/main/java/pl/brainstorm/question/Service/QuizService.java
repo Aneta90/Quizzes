@@ -80,6 +80,7 @@ public class QuizService {
 
     public List<Quiz> getListOfQuizzesByName() {
         List<QuizEntity> quizEntityList = quizRepository.findAllByName();
+
         List<Quiz> quizList = new ArrayList<>();
         for (QuizEntity quizEntity : quizEntityList) {
             quizList.add(mappingService.map(quizEntity));

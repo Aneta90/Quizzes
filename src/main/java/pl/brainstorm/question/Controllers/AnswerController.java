@@ -30,7 +30,7 @@ public class AnswerController {
     @GetMapping("/answerList/{id}")
     public ResponseEntity answerListForGivenQuestion(@PathVariable Long id){
 
-        List<Answer> answerList = answerService.responseListForGivenQuestion(id);
+        List<Answer> answerList = answerService.answerListForGivenQuestion(id);
         if(answerList.isEmpty()){
             logger.warn("Base is empty. Firstly, add some answers.");
             return new ResponseEntity(HttpStatus.NO_CONTENT);

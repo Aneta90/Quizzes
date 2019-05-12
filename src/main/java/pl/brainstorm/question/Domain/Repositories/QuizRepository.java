@@ -2,6 +2,7 @@ package pl.brainstorm.question.Domain.Repositories;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import pl.brainstorm.question.Domain.Entities.QuestionsEntity;
 import pl.brainstorm.question.Domain.Entities.QuizEntity;
@@ -23,6 +24,7 @@ public interface QuizRepository extends JpaRepository<QuizEntity, Long> {
 
     List<QuizEntity> findByName(String name);
 
+    @Query("SELECT q from QuizEntity q order by q.name")
     List<QuizEntity> findAllByName();
 
     List<QuizEntity> findAllById(Long id);
