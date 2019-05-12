@@ -12,7 +12,7 @@ import pl.brainstorm.question.Service.AuthorService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Author")
+@RequestMapping("/author")
 public class AuthorController {
 
     private final static Logger logger = LoggerFactory.getLogger(AuthorController.class);

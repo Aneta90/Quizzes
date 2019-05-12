@@ -7,8 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pl.brainstorm.question.Controllers.AuthorController;
 import pl.brainstorm.question.Domain.Entities.AnswerEntity;
+import pl.brainstorm.question.Domain.Entities.QuestionsEntity;
 import pl.brainstorm.question.Domain.Repositories.AnswerRepository;
 import pl.brainstorm.question.Models.Answer;
+import pl.brainstorm.question.Models.Question;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +54,11 @@ public class AnswerService {
 
     public Long addAnswer(Answer answer) {
         return mappingService.map(answer).getId();
+    }
+
+    public Boolean doesAnswerExist(Answer answer){
+        AnswerEntity answerEntity = mappingService.map(answer);
+        return answerRepository.existsById(answerEntity.getId());
     }
 
     public Boolean removeAnswer(Long id){

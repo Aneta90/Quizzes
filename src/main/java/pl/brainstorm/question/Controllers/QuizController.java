@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("/quiz")
 public class QuizController {
 
-    private final static Logger logger = LoggerFactory.getLogger(AuthorController.class);
+    private final static Logger logger = LoggerFactory.getLogger(QuizController.class);
 
     private final QuizService quizService;
 
