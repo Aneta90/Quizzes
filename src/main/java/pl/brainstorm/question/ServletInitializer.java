@@ -1,8 +1,8 @@
-package pl.brainstorm.question.Util;
+package pl.brainstorm.question;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import pl.brainstorm.question.Util.QuestionApplication;
+import pl.brainstorm.question.QuestionApplication;
 
 public class ServletInitializer extends SpringBootServletInitializer {
 

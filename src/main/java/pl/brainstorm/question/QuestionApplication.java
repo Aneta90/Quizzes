@@ -1,4 +1,4 @@
-package pl.brainstorm.question.Util;
+package pl.brainstorm.question;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

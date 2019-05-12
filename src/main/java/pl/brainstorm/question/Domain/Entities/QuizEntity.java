@@ -24,6 +24,7 @@ public class QuizEntity implements Serializable {
     private List<QuestionsEntity> questionsList;
 
     @Setter(AccessLevel.NONE)
+    @ElementCollection
     private List<Long> totalScore;
 
     private int sizeOfQuestionList;

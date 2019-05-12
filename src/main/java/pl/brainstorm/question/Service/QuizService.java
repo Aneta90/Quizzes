@@ -24,7 +24,7 @@ public class QuizService {
     }
 
 
-    public List<Quiz> getListOfQuizes() {
+    public List<Quiz> getListOfQuizzes() {
         List<QuizEntity> quizEntities = quizRepository.findAll();
         List<Quiz> quizList = new ArrayList<>();
         for (QuizEntity quizEntity : quizEntities) {
@@ -33,7 +33,7 @@ public class QuizService {
         return quizList;
     }
 
-    public List<Quiz> getListOfQuizesByAuthorId(Long id) {
+    public List<Quiz> getListOfQuizzesByAuthorId(Long id) {
         List<QuizEntity> quizEntityList = quizRepository.findAllByAuthorId(id);
         List<Quiz> quizList = new ArrayList<>();
         for (QuizEntity quizEntity : quizEntityList) {
@@ -42,7 +42,7 @@ public class QuizService {
         return quizList;
     }
 
-    public List<Quiz> getListOfQuizesWithNumberOfQuestionsGreatenThen(int numberOfQuestions) {
+    public List<Quiz> getListOfQuizzesWithNumberOfQuestionsGreaterThen(int numberOfQuestions) {
         List<QuizEntity> quizEntityList = quizRepository.findAllBySizeOfQuestionListGreaterThanEqual(numberOfQuestions);
         List<Quiz> quizList = new ArrayList<>();
         for (QuizEntity quizEntity : quizEntityList) {
@@ -51,7 +51,7 @@ public class QuizService {
         return quizList;
     }
 
-    public List<Quiz> getListOfQuizesWithNumberOfQuestionsLowerThen(int numberOfQuestions) {
+    public List<Quiz> getListOfQuizzesWithNumberOfQuestionsLowerThen(int numberOfQuestions) {
         List<QuizEntity> quizEntityList = quizRepository.findAllBySizeOfQuestionListLessThanEqual(numberOfQuestions);
         List<Quiz> quizList = new ArrayList<>();
         for (QuizEntity quizEntity : quizEntityList) {
@@ -60,7 +60,7 @@ public class QuizService {
         return quizList;
     }
 
-    public List<Quiz> getListOfQuizesSolvedMoreThen(int numberOfTries) {
+    public List<Quiz> getListOfQuizzesSolvedMoreThen(int numberOfTries) {
         List<QuizEntity> quizEntityList = quizRepository.findAllByNumberOfSolvedGreaterThanEqual(numberOfTries);
         List<Quiz> quizList = new ArrayList<>();
         for (QuizEntity quizEntity : quizEntityList) {
@@ -69,7 +69,7 @@ public class QuizService {
         return quizList;
     }
 
-    public List<Quiz> getListOfQuizesSolveLessThen(int numberOfTries) {
+    public List<Quiz> getListOfQuizzesSolveLessThen(int numberOfTries) {
         List<QuizEntity> quizEntityList = quizRepository.findAllByNumberOfSolvedLessThanEqual(numberOfTries);
         List<Quiz> quizList = new ArrayList<>();
         for (QuizEntity quizEntity : quizEntityList) {
@@ -78,7 +78,7 @@ public class QuizService {
         return quizList;
     }
 
-    public List<Quiz> getListOfQuizesByName() {
+    public List<Quiz> getListOfQuizzesByName() {
         List<QuizEntity> quizEntityList = quizRepository.findAllByName();
         List<Quiz> quizList = new ArrayList<>();
         for (QuizEntity quizEntity : quizEntityList) {
@@ -92,7 +92,7 @@ public class QuizService {
         return quizRepository.save(mappingService.map(quiz)).getId();
     }
 
-    public Boolean removeQuize(Long id) {
+    public Boolean removeQuiz(Long id) {
         List<QuizEntity> quizEntityList = quizRepository.findAllById(id);
         if (quizEntityList.size() > 1 || quizEntityList.size() == 0) {
             return false;
