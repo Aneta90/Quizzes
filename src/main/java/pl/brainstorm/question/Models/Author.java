@@ -4,13 +4,11 @@ import java.util.List;
 
 public class Author {
 
-    private Long id; // do poprawy
     private String name;
     private String surname;
     private String email;
     private List<Quiz> quizList;
     private Long quizListSize;
-
 
     public Author() {
     }
@@ -21,14 +19,6 @@ public class Author {
         this.email = email;
         this.quizList = quizList;
         this.quizListSize = quizListSize;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -74,7 +64,7 @@ public class Author {
     @Override
     public String toString() {
         return "Author{" +
-                "id=" + id +
+
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
