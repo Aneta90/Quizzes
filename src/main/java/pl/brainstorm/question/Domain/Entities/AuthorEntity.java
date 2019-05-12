@@ -19,14 +19,17 @@ public class AuthorEntity implements Serializable {
 
     @OneToMany(mappedBy = "authorId", cascade = CascadeType.ALL)
     private List <QuizEntity> quizEntityList;
-
+    private Long quizListSize;
     public AuthorEntity() {
     }
 
-    public AuthorEntity(String name, String surname, @Email String email) {
+    public AuthorEntity(String name, String surname, @Email String email,
+                        List<QuizEntity> quizEntityList, Long quizListSize) {
         this.name = name;
         this.surname = surname;
         this.email = email;
+        this.quizEntityList = quizEntityList;
+        this.quizListSize = quizListSize;
     }
 
     public Long getId() {
@@ -67,6 +70,14 @@ public class AuthorEntity implements Serializable {
 
     public void setQuizEntityList(List<QuizEntity> quizEntityList) {
         this.quizEntityList = quizEntityList;
+    }
+
+    public Long getQuizListSize() {
+        return quizListSize;
+    }
+
+    public void setQuizListSize(Long quizListSize) {
+        this.quizListSize = quizListSize;
     }
 
     @Override

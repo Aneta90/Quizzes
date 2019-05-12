@@ -9,18 +9,19 @@ public class Author {
     private String surname;
     private String email;
     private List<Quiz> quizList;
+    private Long quizListSize;
+
 
     public Author() {
     }
 
-    public Author(Long id, String name, String surname, String email, List<Quiz> quizList) {
-        this.id = id;
+    public Author(String name, String surname, String email, List<Quiz> quizList, Long quizListSize) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.quizList = quizList;
+        this.quizListSize = quizListSize;
     }
-
 
     public Long getId() {
         return id;
@@ -60,6 +61,14 @@ public class Author {
 
     public void setQuizList(List<Quiz> quizList) {
         this.quizList = quizList;
+    }
+
+    public Long getQuizListSize() {
+        return quizListSize;
+    }
+
+    public void setQuizListSize(Long quizListSize) {
+        this.quizListSize = quizListSize;
     }
 
     @Override

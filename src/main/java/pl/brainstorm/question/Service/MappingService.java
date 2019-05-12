@@ -22,7 +22,7 @@ public class MappingService {
         author.setEmail(authorEntity.getEmail());
         author.setName(authorEntity.getName());
         author.setSurname(authorEntity.getSurname());
-
+        author.setQuizListSize(authorEntity.getQuizListSize());
         List<Quiz> quizList = new ArrayList<>();
         for (int i = 0; i < authorEntity.getQuizEntityList().size(); i++) {
             quizList.add(map(authorEntity.getQuizEntityList().get(i)));
@@ -36,7 +36,7 @@ public class MappingService {
         authorEntity.setEmail(author.getEmail());
         authorEntity.setName(author.getName());
         authorEntity.setSurname(author.getSurname());
-
+        authorEntity.setQuizListSize(author.getQuizListSize());
         List<QuizEntity> quizEntityList = new ArrayList<>();
         for (int i = 0; i < author.getQuizList().size(); i++) {
             quizEntityList.add(map(author.getQuizList().get(i)));
