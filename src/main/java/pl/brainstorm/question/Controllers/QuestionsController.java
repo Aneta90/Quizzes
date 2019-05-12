@@ -15,10 +15,10 @@ import pl.brainstorm.question.Util.CustomError;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Questions")
+@RequestMapping("/questions")
 public class QuestionsController {
 
-    private final static Logger logger = LoggerFactory.getLogger(AuthorController.class);
+    private final static Logger logger = LoggerFactory.getLogger(QuestionsController.class);
 
     private final QuestionService questionService;
 
@@ -80,7 +80,7 @@ public class QuestionsController {
      @PutMapping("/editQuestion/{id}")
     public ResponseEntity editQuestion(@RequestBody Question question, @PathVariable Long id){
 
-        logger.info("Edit answer with id[}", id);
+        logger.info("Edit question with id[}", id);
         Question question1 = questionService.editQuestion(id,question);
         if(question1 == null){
             logger.error("Something went wrong. You can not edit the question.");

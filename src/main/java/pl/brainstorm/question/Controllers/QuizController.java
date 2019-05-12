@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.brainstorm.question.Service.QuizService;
 
 @RestController
-@RequestMapping("/Quiz")
+@RequestMapping("/quiz")
 public class QuizController {
 
-    private final static Logger logger = LoggerFactory.getLogger(AuthorController.class);
+    private final static Logger logger = LoggerFactory.getLogger(QuizController.class);
 
     private final QuizService quizService;
 
