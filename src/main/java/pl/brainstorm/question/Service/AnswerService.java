@@ -3,6 +3,7 @@ package pl.brainstorm.question.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pl.brainstorm.question.Controllers.AuthorController;
 import pl.brainstorm.question.Domain.Entities.AnswerEntity;
@@ -49,15 +50,33 @@ public class AnswerService {
         }
     }
 
-    Long addResponse(Answer answer){
-        return null;
+    public Long addAnswer(Answer answer) {
+        return mappingService.map(answer).getId();
     }
 
-    Boolean removeResponse(Long id){
-        return false;
+    public Boolean removeAnswer(Long id){
+        boolean isDeleted = false;
+        if (answerRepository.existsById(id)) {
+            answerRepository.deleteById(id);
+            isDeleted = true;
+        }
+        return isDeleted;
     }
 
-    Answer editResponse(Answer answer, Long id){
+    public Answer editAnswer(Answer answer, Long id){
+        if (answerRepository.existsById(id)) {
+            AnswerEntity answerEntity = answerRepository.getOne(id);
+            answerEntity.setAnswerA(answer.getAnswerA());
+            answerEntity.setACorrect(answer.getACorrect());
+            answerEntity.setAnswerB(answer.getAnswerB());
+            answerEntity.setBCorrect(answer.getBCorrect());
+            answerEntity.setAnswerC(answer.getAnswerC());
+            answerEntity.setCCorrect(answer.getCCorrect()); //do przepatrzenia...
+            answerEntity.setAnswerD(answer.getAnswerD());
+            answerEntity.setDCorrect(answer.getDCorrect());
+            answerRepository.save(answerEntity);
+            return mappingService.map(answerEntity);
+        }
         return null;
     }
 
