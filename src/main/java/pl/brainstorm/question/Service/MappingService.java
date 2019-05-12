@@ -120,7 +120,18 @@ public class MappingService {
     }
 
     public AnswerEntity map(Answer answer) {
-        return null;
+
+        AnswerEntity answerEntity = new AnswerEntity();
+        answerEntity.setAnswerA(answer.getAnswerA());
+        answerEntity.setACorrect(answer.getACorrect());
+        answerEntity.setAnswerB(answer.getAnswerB());
+        answerEntity.setBCorrect(answer.getBCorrect());
+        answerEntity.setAnswerC(answer.getAnswerC());
+        answerEntity.setCCorrect(answer.getCCorrect());
+        answerEntity.setAnswerD(answer.getAnswerD());
+        answerEntity.setDCorrect(answer.getDCorrect());
+
+        return answerEntity;
     }
 
 }
