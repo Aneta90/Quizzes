@@ -59,7 +59,7 @@ public class QuestionService {
     }
 
     public Long addQuestion(Question question){//zastanowić się jak dodać konkretne pytanie do konkretnego quizu
-    return mappingService.map(question).getId();
+    return questionsRepository.save(mappingService.map(question)).getId();
     }
 
     public Boolean doesQuestionExist(Question question){

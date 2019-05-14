@@ -56,7 +56,7 @@ public class AnswerService {
     }
 
     public Long addAnswer(Answer answer) {
-        return mappingService.map(answer).getId();
+        return answerRepository.save(mappingService.map(answer)).getId();
     }
 
     public Boolean doesAnswerExist(Answer answer) {

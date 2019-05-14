@@ -142,7 +142,7 @@ public class QuestionServiceTest {
     public void addQuestion() {
 
         Question question = new Question();
-        que
+
 
         QuestionsEntity questionsEntity = new QuestionsEntity();
 
