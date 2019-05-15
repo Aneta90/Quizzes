@@ -148,12 +148,11 @@ public class QuizController {
 
     @PutMapping("/editQuiz/email/{email}/quiz/{quizName}")
     public ResponseEntity editQuiz(@RequestBody Question question, @PathVariable String email, @PathVariable String quizName) {
-
-        if (authorService.isAuthorInDatabase(email) ) {
+        if (authorService.isAuthorInDatabase(email)) {
             Author author = authorService.getAuthorByEmail(email);
             Quiz quiz = quizService.getSingleQuizWithGivenName(quizName);
 
-            quiz = quizService.addNewQuestionToQuiz(quiz,question);
+            quiz = quizService.addNewQuestionToQuiz(quiz, question);
             author = authorService.editQuizInGivenAuthor(author, quiz);
             return new ResponseEntity<>(author, HttpStatus.OK);
         } else {

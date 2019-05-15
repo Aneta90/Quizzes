@@ -117,9 +117,10 @@ public class QuizService {
         QuizEntity quizEntity = quizRepository.findByName(quiz.getName());
        //prawdopodobnie zbedne do sprawdzenia
         quizEntity.setTotalScore(quiz.getTotalScore());
-        quizEntity.setSizeOfQuestionList(quiz.getSizeOfQuestionList());
         quizEntity.setNumberOfSolved(quiz.getNumberOfSolved());
         quizEntity.getQuestionsList().add(mappingService.map(question));
+
+        quizEntity.setSizeOfQuestionList(quiz.getQuestionsList().size()+1);
         quizRepository.save(quizEntity);
         return mappingService.map(quizEntity);
     }

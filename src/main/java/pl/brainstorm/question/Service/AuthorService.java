@@ -139,6 +139,7 @@ public class AuthorService {
     }
 
     public Author addQuizToGivenAuthor(Author author, Quiz quiz) {
+        quiz.setSizeOfQuestionList(0);
         author.getQuizList().add(quiz);
         return author;
     }
