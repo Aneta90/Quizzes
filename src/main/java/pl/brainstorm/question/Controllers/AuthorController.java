@@ -26,7 +26,7 @@ public class AuthorController {
     }
 
 
-    @GetMapping("/listOfAuthor")
+    @GetMapping("/listOfAll")
     public ResponseEntity listOfAllAuthor() {
         List<Author> authorList = authorService.getListOfAuthor();
         if (authorList.isEmpty()) {
@@ -37,20 +37,22 @@ public class AuthorController {
         return new ResponseEntity<>(authorList, HttpStatus.OK);
     }
 
+    //+++
     @PostMapping("/add")
     public ResponseEntity saveAuthor(@RequestBody Author author) {
-        logger.info("Adding new author : {}", author);
-        if (authorService.isAuthorInDatabase(author)) {
-            logger.info("There is {} in database.", author);
-            return new ResponseEntity(HttpStatus.CONFLICT);
+        logger.info("Adding new Author : {}", author);
+        if (authorService.isAuthorInDatabase(author)) { // check by email
+            logger.info("There is Author : {} in database.", author);
+            Author authorFromDatabase = authorService.getAuthorByEmail(author.getEmail());
+            return new ResponseEntity<>(authorFromDatabase, HttpStatus.OK);
         }
-        Long id = authorService.saveAuthor(author);
-        logger.info("Added author {}.", author);
+        authorService.saveAuthor(author);
+        logger.info("Added Author {}.", author);
 
-        return new ResponseEntity<>(id, HttpStatus.OK);
+        return new ResponseEntity<>(author, HttpStatus.OK);
     }
 
-    @GetMapping("/authorsNumberQuizzesGreaterThen/{numberOfQuizzes}")
+    @GetMapping("/numberQuizzesGreaterThen/{numberOfQuizzes}")
     public ResponseEntity findAuthorsWithNumberOfQuizzesGreaterThen(@PathVariable int numberOfQuizzes) {
         List<Author> authorList = authorService.findAuthorsWithNumberOfQuizzesGreaterThen(numberOfQuizzes);
         if (authorList.isEmpty()) {
@@ -61,7 +63,7 @@ public class AuthorController {
         return new ResponseEntity<>(authorList, HttpStatus.OK);
     }
 
-    @GetMapping("/authorsNumberQuizzesLessThen/{numberOfQuizzes}")
+    @GetMapping("/numberQuizzesLessThen/{numberOfQuizzes}")
     public ResponseEntity findAuthorsWithNumberOfQuizzesLowerThen(@PathVariable int numberOfQuizzes) {
         List<Author> authorList = authorService.findAuthorsWithNumberOfQuizzesLowerThen(numberOfQuizzes);
         if (authorList.isEmpty()) {
@@ -72,7 +74,7 @@ public class AuthorController {
         return new ResponseEntity<>(authorList, HttpStatus.OK);
     }
 
-    @DeleteMapping("/removeAuthorById/{id}")
+    @DeleteMapping("/removeAuthorById/{id}")  // zbedne
     public ResponseEntity removeAuthorById(@PathVariable Long id) {
         logger.info("Starting removing author with id {}.", id);
         boolean isRemoved = authorService.removeAuthorById(id);
@@ -96,7 +98,7 @@ public class AuthorController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @GetMapping("/isAuthorPresent/{email}")
+    @GetMapping("/isAuthorPresent/{email}") // zbedne
     public ResponseEntity isAuthorInDatabase(@PathVariable String email) {
         logger.info("Checking is author with email {}, is in database", email);
         boolean isInDatabase = authorService.isAuthorWithEmailInDatabase(email);
@@ -108,7 +110,7 @@ public class AuthorController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @PutMapping("/editAuthor/{id}")
+    @PutMapping("/editAuthor/{id}") //zbedne
     public ResponseEntity editAuthor(@RequestBody Author author, @PathVariable Long id) {
         Author author1 = authorService.editAuthor(author, id);
         if (author1 == null) {

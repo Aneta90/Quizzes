@@ -14,7 +14,7 @@ public class QuestionsEntity implements Serializable {
 
     private String content;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<AnswerEntity> answerEntityList;
 
 

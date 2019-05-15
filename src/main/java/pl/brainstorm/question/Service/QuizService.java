@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.brainstorm.question.Domain.Entities.QuizEntity;
 import pl.brainstorm.question.Domain.Repositories.QuizRepository;
+import pl.brainstorm.question.Models.Question;
 import pl.brainstorm.question.Models.Quiz;
 
 import java.util.ArrayList;
@@ -112,8 +113,19 @@ public class QuizService {
         return mappingService.map(quizEntity);
     }
 
+    public Quiz addNewQuestionToQuiz(Quiz quiz, Question question) {
+        QuizEntity quizEntity = quizRepository.findByName(quiz.getName());
+       //prawdopodobnie zbedne do sprawdzenia
+        quizEntity.setTotalScore(quiz.getTotalScore());
+        quizEntity.setSizeOfQuestionList(quiz.getSizeOfQuestionList());
+        quizEntity.setNumberOfSolved(quiz.getNumberOfSolved());
+        quizEntity.getQuestionsList().add(mappingService.map(question));
+        quizRepository.save(quizEntity);
+        return mappingService.map(quizEntity);
+    }
+
     public Long findByNameAndReturnId(String quizName) {
-        List<QuizEntity> quizEntityList = quizRepository.findByName(quizName);
+        List<QuizEntity> quizEntityList = quizRepository.findAllByName(quizName);
         if (quizEntityList.size() > 1) {
             // do przemyslenia swoje zycie
         }
@@ -121,7 +133,15 @@ public class QuizService {
     }
 
     public Boolean isQuizInDataBase(Quiz quiz) {
-        List<QuizEntity> quizEntityList = quizRepository.findByName(quiz.getName());
+        List<QuizEntity> quizEntityList = quizRepository.findAllByName(quiz.getName());
+        if (quizEntityList.size() != 1) {
+            return false;
+        }
+        return true;
+    }
+
+    public Boolean isQuizInDataBase(String quizName) { // czy nie lepeiej zrobic szukanie bez listy? bo name unikalny
+        List<QuizEntity> quizEntityList = quizRepository.findAllByName(quizName);
         if (quizEntityList.size() != 1) {
             return false;
         }
@@ -129,10 +149,12 @@ public class QuizService {
     }
 
     public Quiz getSingleQuizWithGivenName(String name) {
-        List<QuizEntity> quizEntityList = quizRepository.findByName(name);
+        List<QuizEntity> quizEntityList = quizRepository.findAllByName(name);
         if (quizEntityList.size() != 1) {
             return null;
         }
         return mappingService.map(quizEntityList.get(0));
     }
+
+
 }

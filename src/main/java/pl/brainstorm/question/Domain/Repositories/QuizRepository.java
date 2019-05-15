@@ -22,11 +22,13 @@ public interface QuizRepository extends JpaRepository<QuizEntity, Long> {
 
     List<QuizEntity> findAllByNumberOfSolvedLessThanEqual(int size);
 
-    List<QuizEntity> findByName(String name);
+    List<QuizEntity> findAllByName(String name);
 
     @Query("SELECT q from QuizEntity q order by q.name")
     List<QuizEntity> findAllByName();
 
     List<QuizEntity> findAllById(Long id);
+
+    QuizEntity findByName(String name);
 
 }

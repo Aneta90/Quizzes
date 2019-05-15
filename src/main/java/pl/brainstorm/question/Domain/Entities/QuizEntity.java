@@ -17,7 +17,7 @@ public class QuizEntity implements Serializable {
 
     private String name;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<QuestionsEntity> questionsList;
 
     @Setter(AccessLevel.NONE)

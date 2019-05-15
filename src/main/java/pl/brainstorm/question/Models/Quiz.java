@@ -1,5 +1,7 @@
 package pl.brainstorm.question.Models;
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 import java.util.List;
 
 public class Quiz {
@@ -16,7 +18,7 @@ public class Quiz {
     }
 
 
-    public Quiz( String name, List<Question> questionsList,
+    public Quiz(String name, List<Question> questionsList,
                 List<Long> totalScore, int sizeOfQuestionList, int numberOfSolved) {
         this.name = name;
         this.questionsList = questionsList;

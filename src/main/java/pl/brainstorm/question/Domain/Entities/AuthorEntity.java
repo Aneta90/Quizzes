@@ -1,5 +1,7 @@
 package pl.brainstorm.question.Domain.Entities;
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.io.Serializable;
@@ -15,11 +17,13 @@ public class AuthorEntity implements Serializable {
     private String surname;
 
     @Email
+
     private String email;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List <QuizEntity> quizEntityList;
+    private List<QuizEntity> quizEntityList;
     private Long quizListSize;
+
     public AuthorEntity() {
     }
 
