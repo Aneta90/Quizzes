@@ -6,8 +6,6 @@ import java.util.List;
 
 public class Quiz {
 
-
-
     private String name;
     private List<Question> questionsList;
     private List<Long> totalScore;

@@ -19,7 +19,7 @@ public class QuestionApplicationTests { //integracyjne testy
 
 	@Test
 	public void contextLoads() {
-		repository.save()
+		///repository.save()
 
 	}
 
