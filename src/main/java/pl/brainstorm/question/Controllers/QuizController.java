@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.brainstorm.question.Models.Author;
+import pl.brainstorm.question.Models.Question;
 import pl.brainstorm.question.Models.Quiz;
+import pl.brainstorm.question.Service.AuthorService;
 import pl.brainstorm.question.Service.QuizService;
 
 import java.util.List;
@@ -20,10 +23,12 @@ public class QuizController {
     private final static Logger logger = LoggerFactory.getLogger(QuizController.class);
 
     private final QuizService quizService;
+    private final AuthorService authorService;
 
     @Autowired
-    public QuizController(QuizService quizService) {
+    public QuizController(QuizService quizService, AuthorService authorService) {
         this.quizService = quizService;
+        this.authorService = authorService;
     }
 
 
@@ -115,17 +120,19 @@ public class QuizController {
         return new ResponseEntity<>(quizList, HttpStatus.OK);
     }
 
-    @PostMapping("/addQuiz")
-    public ResponseEntity addQuiz(@RequestBody Quiz quiz) {
-        Boolean isInDatabase = quizService.isQuizInDataBase(quiz);
-        if (isInDatabase) {
+    @PostMapping("/addQuiz/{email}")
+    public ResponseEntity addQuizToAuthorWithGivenEmail(@RequestBody Quiz quiz, @PathVariable String email) {
+        if (quizService.isQuizInDataBase(quiz.getName())) {
             logger.info("There is quiz on database name like quiz you try to add, name : {}", quiz.getName());
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
-        logger.info("Adding quiz : {}", quiz);
-        Long id = quizService.addQuiz(quiz);
-        logger.info("added quiz : {}", quiz);
-        return new ResponseEntity<>(id, HttpStatus.OK);
+        logger.info("Adding quiz : {}, to Author with email {}", quiz, email);
+
+        Author author = authorService.getAuthorByEmail(email);
+        author = authorService.addQuizToGivenAuthor(author, quiz);
+        authorService.editAuthor(author);
+        logger.info("Added quiz : {}", quiz);
+        return new ResponseEntity<>(author, HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteQuiz/{id}")
@@ -139,12 +146,18 @@ public class QuizController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @PutMapping("/editQuiz/{id}")
-    public ResponseEntity editQuiz(@RequestBody Quiz quiz, @PathVariable Long id) {
-        Quiz quiz1 = quizService.editQuiz(id, quiz);
-        if (!quiz.equals(quiz1)) {
+    @PutMapping("/editQuiz/email/{email}/quiz/{quizName}")
+    public ResponseEntity editQuiz(@RequestBody Question question, @PathVariable String email, @PathVariable String quizName) {
+        if (authorService.isAuthorInDatabase(email)) {
+            Author author = authorService.getAuthorByEmail(email);
+            Quiz quiz = quizService.getSingleQuizWithGivenName(quizName);
+
+            quiz = quizService.addNewQuestionToQuiz(quiz, question);
+            author = authorService.editQuizInGivenAuthor(author, quiz);
+            return new ResponseEntity<>(author, HttpStatus.OK);
+        } else {
+            // ...
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
-        return new ResponseEntity(HttpStatus.OK);
     }
 }

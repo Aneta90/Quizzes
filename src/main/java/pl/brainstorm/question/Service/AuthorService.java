@@ -6,12 +6,13 @@ import pl.brainstorm.question.Domain.Entities.AuthorEntity;
 import pl.brainstorm.question.Domain.Entities.QuizEntity;
 import pl.brainstorm.question.Domain.Repositories.AuthorRepository;
 import pl.brainstorm.question.Models.Author;
+import pl.brainstorm.question.Models.Question;
 import pl.brainstorm.question.Models.Quiz;
+
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AuthorService {
@@ -38,6 +39,11 @@ public class AuthorService {
 
     public Long saveAuthor(Author author) {
         return authorRepository.save(mappingService.map(author)).getId();
+    }
+
+    public Author getAuthorByEmail(String email) {
+        Author author = mappingService.map(authorRepository.findByEmail(email));
+        return author;
     }
 
     public List<Author> findAuthorsWithNumberOfQuizzesGreaterThen(int numberOfQuizzes) {
@@ -83,6 +89,14 @@ public class AuthorService {
         return false;
     }
 
+    public Boolean isAuthorInDatabase(String email) {
+        AuthorEntity authorEntity = authorRepository.findByEmail(email);
+        if (authorEntity != null) {
+            return true;
+        }
+        return false;
+    }
+
     public Boolean isAuthorWithEmailInDatabase(String email) {
         AuthorEntity authorEntity = authorRepository.findByEmail(email);
         return authorRepository.existsById(authorEntity.getId());
@@ -105,6 +119,37 @@ public class AuthorService {
         }
         authorEntity.setQuizEntityList(quizEntityList);
         authorRepository.save(authorEntity);
+        return author;
+    }
+
+    public Author editAuthor(Author author) {
+        AuthorEntity authorEntity = authorRepository.findByEmail(author.getEmail());
+
+        authorEntity.setName(author.getName());
+        authorEntity.setSurname(author.getSurname());
+        authorEntity.setEmail(author.getEmail());
+        authorEntity.setQuizListSize(author.getQuizListSize());
+        List<QuizEntity> quizEntityList = new ArrayList<>();
+        for (int i = 0; i < author.getQuizList().size(); i++) {
+            quizEntityList.add(mappingService.map(author.getQuizList().get(i)));
+        }
+        authorEntity.setQuizEntityList(quizEntityList);
+        authorRepository.save(authorEntity);
+        return author;
+    }
+
+    public Author addQuizToGivenAuthor(Author author, Quiz quiz) {
+        quiz.setSizeOfQuestionList(0);
+        author.getQuizList().add(quiz);
+        return author;
+    }
+
+    public Author editQuizInGivenAuthor(Author author, Quiz quiz) {
+        for (int i = 0; i < author.getQuizList().size(); i++) {
+            if (author.getQuizList().get(i).getName().equals(quiz.getName())) {
+                author.getQuizList().set(i, quiz);
+            }
+        }
         return author;
     }
 }
