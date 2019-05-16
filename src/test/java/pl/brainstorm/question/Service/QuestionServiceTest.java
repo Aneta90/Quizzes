@@ -20,8 +20,10 @@ import pl.brainstorm.question.Models.Quiz;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
@@ -42,15 +44,15 @@ public class QuestionServiceTest {
     @InjectMocks
     QuestionService questionService;
 
-    List<Answer> answerList = new ArrayList<>();
-    List<AnswerEntity> answerEntityList = new ArrayList<>();
-    List<Quiz> quizList = new ArrayList<>();
-    List<QuizEntity> quizEntityList = new ArrayList<>();
-    List<Question> questionList = new ArrayList<>();
-    List<QuestionsEntity> questionEntityList = new ArrayList<>();
+    private List<Answer> answerList = new ArrayList<>();
+    private List<AnswerEntity> answerEntityList = new ArrayList<>();
+    private List<Quiz> quizList = new ArrayList<>();
+    private List<QuizEntity> quizEntityList = new ArrayList<>();
+    private List<Question> questionList = new ArrayList<>();
+    private List<QuestionsEntity> questionEntityList = new ArrayList<>();
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp(){
 
         MockitoAnnotations.initMocks(this);
         questionService = new QuestionService(mappingService,questionsRepository,quizService);
@@ -115,6 +117,7 @@ public class QuestionServiceTest {
 
         when(questionsRepository.findAll()).thenReturn(questionEntityList);
         when(questionsRepository.findAllQuestionsByQuizId(anyLong())).thenReturn(questionEntityList);
+
     }
 
     @Test
@@ -133,7 +136,7 @@ public class QuestionServiceTest {
 
     @Test
     public void getListOfQuestionsInGivenQuizByName() {
-        List<Question> questionList = questionService.getListOfQuestionsinGivenQuizByName("Anett");
+        List<Question> questionList = questionService.getListOfQuestionsInGivenQuizByName("Anett");
         assertEquals(questionList.size(),1);
         assertEquals("Does Java support multiple inheritance",questionEntityList.get(0).getContent());
     }
@@ -141,25 +144,141 @@ public class QuestionServiceTest {
     @Test
     public void addQuestion() {
 
-        Question question = new Question();
+        Answer answer = new Answer();
+        answer.setAnswerA("int");
+        answer.setACorrect(true);
+        answer.setAnswerB("String");
+        answer.setBCorrect(false);
+        answer.setAnswerC("Long");
+        answer.setCCorrect(false);
+        answer.setAnswerD("Integer");
+        answer.setDCorrect(false);
 
+        AnswerEntity answerEntity = new AnswerEntity();
+        answerEntity.setAnswerA("int");
+        answerEntity.setACorrect(true);
+        answerEntity.setAnswerB("String");
+        answerEntity.setBCorrect(false);
+        answerEntity.setAnswerC("Long");
+        answerEntity.setCCorrect(false);
+        answerEntity.setAnswerD("Integer");
+        answerEntity.setDCorrect(false);
+
+        List<Answer> answerList = new ArrayList<>();
+        answerList.add(answer);
+
+        List<AnswerEntity> answerEntityList = new ArrayList<>();
+        answerEntityList.add(answerEntity);
+
+        Question question = new Question();
+        question.setContent("Primitive types are:");
+        question.setAnswerList(answerList);
 
         QuestionsEntity questionsEntity = new QuestionsEntity();
+        questionsEntity.setContent("Primitive types are:");
+        questionsEntity.setAnswerEntityList(answerEntityList);
 
-
-
-
+        when(questionsRepository.save(questionsEntity)).thenReturn(questionsEntity);
+        assertEquals(questionsEntity.getContent(),"Primitive types are:");
     }
 
     @Test
     public void doesQuestionExist() {
+
+        Answer answer = new Answer();
+        answer.setAnswerA("int");
+        answer.setACorrect(true);
+        answer.setAnswerB("String");
+        answer.setBCorrect(false);
+        answer.setAnswerC("Long");
+        answer.setCCorrect(false);
+        answer.setAnswerD("Integer");
+        answer.setDCorrect(false);
+
+        List<Answer> answerList = new ArrayList<>();
+        answerList.add(answer);
+
+        Question question = new Question();
+        question.setContent("Primitive types are:");
+        question.setAnswerList(answerList);
+
+        AnswerEntity answerEntity = new AnswerEntity();
+        answerEntity.setAnswerA("int");
+        answerEntity.setACorrect(true);
+        answerEntity.setAnswerB("String");
+        answerEntity.setBCorrect(false);
+        answerEntity.setAnswerC("Long");
+        answerEntity.setCCorrect(false);
+        answerEntity.setAnswerD("Integer");
+        answerEntity.setDCorrect(false);
+
+        List<AnswerEntity> answerEntityList = new ArrayList<>();
+        answerEntityList.add(answerEntity);
+
+        QuestionsEntity questionsEntity = new QuestionsEntity();
+        questionsEntity.setId(1L);
+        questionsEntity.setContent("Primitive types are:");
+        questionsEntity.setAnswerEntityList(answerEntityList);
+
+        when(questionsRepository.existsById(anyLong())).thenReturn(true);
+        assertEquals(Optional.of(questionsEntity.getId()), Optional.of(1L));
     }
 
     @Test
     public void editQuestion() {
+
+        Answer answer = new Answer();
+        answer.setAnswerA("int");
+        answer.setACorrect(true);
+        answer.setAnswerB("BigInteger");
+        answer.setBCorrect(false);
+        answer.setAnswerC("BigDecimal");
+        answer.setCCorrect(false);
+        answer.setAnswerD("Boolean");
+        answer.setDCorrect(false);
+
+        List<Answer> answerList = new ArrayList<>();
+        answerList.add(answer);
+
+        Question question = new Question();
+        question.setContent("Primitive types are:");
+        question.setAnswerList(answerList);
+
+        List<Question> questionList = new ArrayList<>();
+        questionList.add(question);
+
+        AnswerEntity answerEntity = new AnswerEntity();
+        answerEntity.setAnswerA("int");
+        answerEntity.setACorrect(true);
+        answerEntity.setAnswerB("BigInteger");
+        answerEntity.setBCorrect(false);
+        answerEntity.setAnswerC("BigDecimal");
+        answerEntity.setCCorrect(false);
+        answerEntity.setAnswerD("Boolean");
+        answerEntity.setDCorrect(false);
+
+        List<AnswerEntity> answerEntityList = new ArrayList<>();
+        answerEntityList.add(answerEntity);
+
+        QuestionsEntity questionsEntity = new QuestionsEntity();
+        questionsEntity.setContent("Primitive types are:");
+        questionsEntity.setAnswerEntityList(answerEntityList);
+
+        List<QuestionsEntity> questionsEntityList = new ArrayList<>();
+        questionsEntityList.add(questionsEntity);
+
+        QuestionsEntity questionEntity1 = questionsRepository.save(questionsEntity);
+        Long id = questionEntity1.getId();
+        when(mappingService.map(questionsEntityList.get(0))).thenReturn(question);
+        Question question1 = questionService.editQuestion(id,question);
+        assertEquals("Primitive types are:", question1.getContent());
+
     }
 
     @Test
     public void removeQuestion() {
+
+
+
     }
 }

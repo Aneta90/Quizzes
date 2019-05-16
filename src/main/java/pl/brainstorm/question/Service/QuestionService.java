@@ -47,7 +47,7 @@ public class QuestionService {
     }
 
 
-    public List<Question> getListOfQuestionsinGivenQuizByName(String quizName){
+    public List<Question> getListOfQuestionsInGivenQuizByName(String quizName){
         Long quizId = quizService.findByNameAndReturnId(quizName);
         List<QuestionsEntity> questionsEntityList = questionsRepository.findAllQuestionsByQuizId(quizId);
         List<Question> questionList = new ArrayList<>();
