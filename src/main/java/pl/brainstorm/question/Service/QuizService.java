@@ -5,11 +5,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.brainstorm.question.Domain.Entities.QuizEntity;
 import pl.brainstorm.question.Domain.Repositories.QuizRepository;
+import pl.brainstorm.question.Models.ChartEntry;
 import pl.brainstorm.question.Models.Question;
 import pl.brainstorm.question.Models.Quiz;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class QuizService {
@@ -69,6 +73,20 @@ public class QuizService {
             quizList.add(mappingService.map(quizEntity));
         }
         return quizList;
+    }
+
+
+    public List<ChartEntry> getListOfMostPopularQuizzes() { //chart zwraca listę 5 najbardziej popularnych quizow
+
+        List<QuizEntity> quizEntityList = quizRepository.findAllByNumberOfSolvedOrderByNumberOfSolved();
+        List<Quiz> quizList = new ArrayList<>();
+        for (QuizEntity quizEntity : quizEntityList) {
+            quizList.add(mappingService.map(quizEntity));
+        }
+
+        return quizList.stream().limit(5)
+                .map(quiz -> new ChartEntry(quiz.getName(), quiz.getNumberOfSolved()))
+                .collect(Collectors.toList());
     }
 
     public List<Quiz> getListOfQuizzesByName() {

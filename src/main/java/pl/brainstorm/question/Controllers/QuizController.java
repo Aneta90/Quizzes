@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.brainstorm.question.Models.Author;
+import pl.brainstorm.question.Models.ChartEntry;
 import pl.brainstorm.question.Models.Question;
 import pl.brainstorm.question.Models.Quiz;
 import pl.brainstorm.question.Service.AuthorService;
@@ -104,7 +105,7 @@ public class QuizController {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
         logger.info("List of quiz sorted by name.");
-        return new ResponseEntity<>(quizList, HttpStatus.OK);
+        return new ResponseEntity<>(quizList,HttpStatus.OK);
     }
 
     @PostMapping("/addQuiz/{email}")
@@ -151,7 +152,14 @@ public class QuizController {
 
     @GetMapping("/theMostPopularQuizzes")
     public ResponseEntity listOfMostPopularQuizzes(){
-     return ResponseEntity();
+        List<ChartEntry> quizList = quizService.getListOfMostPopularQuizzes();
+        if (quizList.isEmpty()) {
+            logger.info("There isn't any quiz in database {}.");
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+        logger.info("List of quiz {}.", quizList);
+        return new ResponseEntity<>(quizList, HttpStatus.OK);
+
     }
 }
 
