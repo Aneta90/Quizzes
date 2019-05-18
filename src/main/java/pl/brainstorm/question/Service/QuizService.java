@@ -17,13 +17,14 @@ public class QuizService {
 
     private final QuizRepository quizRepository;
     private final MappingService mappingService;
+    private final QuestionService questionService;
 
     @Autowired
-    public QuizService(QuizRepository quizRepository, MappingService mappingService) {
+    public QuizService(QuizRepository quizRepository, MappingService mappingService, QuestionService questionService) {
         this.quizRepository = quizRepository;
         this.mappingService = mappingService;
+        this.questionService = questionService;
     }
-
 
     public List<Quiz> getListOfQuizzes() {
         List<QuizEntity> quizEntities = quizRepository.findAll();
@@ -33,15 +34,6 @@ public class QuizService {
         }
         return quizList;
     }
-
-   // public List<Quiz> getListOfQuizzesByAuthorId(Long id) {
-//        List<QuizEntity> quizEntityList = quizRepository.findAllByAuthorId(id);
-//        List<Quiz> quizList = new ArrayList<>();
-//        for (QuizEntity quizEntity : quizEntityList) {
-//            quizList.add(mappingService.map(quizEntity));
-//        }
-//        return quizList;
-//    }
 
     public List<Quiz> getListOfQuizzesWithNumberOfQuestionsGreaterThen(int numberOfQuestions) {
         List<QuizEntity> quizEntityList = quizRepository.findAllBySizeOfQuestionListGreaterThanEqual(numberOfQuestions);
@@ -89,58 +81,18 @@ public class QuizService {
         return quizList;
     }
 
-    public Long addQuiz(Quiz quiz) {
-        return quizRepository.save(mappingService.map(quiz)).getId();
-    }
-
-    public Boolean removeQuiz(Long id) {
-        List<QuizEntity> quizEntityList = quizRepository.findAllById(id);
-        if (quizEntityList.size() > 1 || quizEntityList.size() == 0) {
-            return false;
-            // do zastanowienia sie czy nie przejac to przy kontrolerze
-        }
-        quizRepository.delete(quizEntityList.get(0));
-        return true;
-    }
-
-    public Quiz editQuiz(Long id, Quiz quiz) {
-        QuizEntity quizEntity = quizRepository.getOne(id);
-        quizEntity.setName(quiz.getName());
-        quizEntity.setTotalScore(quiz.getTotalScore());
-        quizEntity.setSizeOfQuestionList(quiz.getSizeOfQuestionList());
-        quizEntity.setNumberOfSolved(quiz.getNumberOfSolved());
-        quizRepository.save(quizEntity);
-        return mappingService.map(quizEntity);
-    }
-
     public Quiz addNewQuestionToQuiz(Quiz quiz, Question question) {
         QuizEntity quizEntity = quizRepository.findByName(quiz.getName());
         quizEntity.setTotalScore(quiz.getTotalScore());
         quizEntity.setNumberOfSolved(quiz.getNumberOfSolved());
         quizEntity.getQuestionsList().add(mappingService.map(question));
 
-        quizEntity.setSizeOfQuestionList(quiz.getQuestionsList().size()+1);
+        quizEntity.setSizeOfQuestionList(quiz.getQuestionsList().size() + 1);
         quizRepository.save(quizEntity);
         return mappingService.map(quizEntity);
     }
 
-    public Long findByNameAndReturnId(String quizName) {
-        List<QuizEntity> quizEntityList = quizRepository.findAllByName(quizName);
-        if (quizEntityList.size() > 1) {
-            // do przemyslenia swoje zycie
-        }
-        return quizEntityList.get(0).getId();
-    }
-
-    public Boolean isQuizInDataBase(Quiz quiz) {
-        List<QuizEntity> quizEntityList = quizRepository.findAllByName(quiz.getName());
-        if (quizEntityList.size() != 1) {
-            return false;
-        }
-        return true;
-    }
-
-    public Boolean isQuizInDataBase(String quizName) { // czy nie lepeiej zrobic szukanie bez listy? bo name unikalny
+    public Boolean isQuizInDataBase(String quizName) {
         List<QuizEntity> quizEntityList = quizRepository.findAllByName(quizName);
         if (quizEntityList.size() != 1) {
             return false;
@@ -156,5 +108,20 @@ public class QuizService {
         return mappingService.map(quizEntityList.get(0));
     }
 
+    public Quiz calculateTotalScore(Quiz quiz) {
+        Long tempToCalcScore = 0L;
+        for (int i = 0; i < quiz.getQuestionsList().size(); i++) {
+            tempToCalcScore += questionService.calculateTotalScoreInQuestion(quiz.getQuestionsList().get(i));
 
+        }
+        List<Long> listOfTotalScore = quiz.getTotalScore();
+        listOfTotalScore.add(tempToCalcScore);
+        return quiz;
+    }
+
+
+    public Boolean deleteGuiz(Quiz quiz) {
+        quizRepository.delete(mappingService.map(quiz));
+        return !isQuizInDataBase(quiz.getName());
+    }
 }

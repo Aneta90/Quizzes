@@ -40,19 +40,6 @@ public class QuestionsController {
         return new ResponseEntity<>(questionsList, HttpStatus.OK);
     }
 
-    @GetMapping("/questionsListInGivenQuiz/{id}")
-    public ResponseEntity questionsListInGivenQuizById(@PathVariable Long id) {
-
-        List<Question> questionList = questionService.getListOfQuestionsInGivenQuizById(id);
-        if (questionList.isEmpty()) {
-            logger.info("There are no questions for given quiz. Firstly, add quiz with given id or add questions to empty quiz!");
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
-        }
-
-        logger.info("List of all questions");
-        return new ResponseEntity<>(questionList, HttpStatus.OK);
-    }
-
     @GetMapping("/questionsListInGivenQuiz/{name}")
     public ResponseEntity questionsListInGivenQuizByName(@PathVariable String name) {
 
@@ -68,7 +55,6 @@ public class QuestionsController {
 
     @PostMapping("/addQuestion")
     public ResponseEntity<?> addQuestion(@RequestBody Question question) {
-
         logger.info("Adding question: {}", question);
         if (questionService.doesQuestionExist(question)) {
             logger.warn("There is exactly the same question in our database!.Question : {}", question);
@@ -76,29 +62,5 @@ public class QuestionsController {
         }
         Long createdAnswerId = questionService.addQuestion(question);
         return new ResponseEntity<>(createdAnswerId, HttpStatus.CREATED);
-    }
-
-    @PutMapping("/editQuestion/{id}")
-    public ResponseEntity editQuestion(@RequestBody Question question, @PathVariable Long id) {
-
-        logger.info("Edit question with id[}", id);
-        Question question1 = questionService.editQuestion(id, question);
-        if (question1 == null) {
-            logger.error("Something went wrong. You can not edit the question.");
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<>(question1, HttpStatus.UPGRADE_REQUIRED);
-    }
-
-    @DeleteMapping("/removeQuestion/{id}")
-    public ResponseEntity<Boolean> removeQuestion(@PathVariable Long id) {
-        boolean isRemoved = questionService.removeQuestion(id);
-        if (!isRemoved) {
-            logger.error("Question with Id {}, wasn't removed", id);
-            return new ResponseEntity<Boolean>(false, HttpStatus.CONFLICT);
-        }
-        logger.info("Question with id {}, is deleted", id);
-        return new ResponseEntity<>(isRemoved, HttpStatus.OK);
-
     }
 }

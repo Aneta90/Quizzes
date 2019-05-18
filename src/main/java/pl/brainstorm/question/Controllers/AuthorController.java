@@ -25,7 +25,6 @@ public class AuthorController {
         this.authorService = authorService;
     }
 
-
     @GetMapping("/listOfAll")
     public ResponseEntity listOfAllAuthor() {
         List<Author> authorList = authorService.getListOfAuthor();
@@ -37,7 +36,15 @@ public class AuthorController {
         return new ResponseEntity<>(authorList, HttpStatus.OK);
     }
 
-    //+++
+    @GetMapping("/getAuthor/{email}")
+    public ResponseEntity getSingleAuthorByEmail(@PathVariable String email) {
+        Author author = authorService.getAuthorByEmail(email);
+        if (author.getName() == null) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(author, HttpStatus.OK);
+    }
+
     @PostMapping("/add")
     public ResponseEntity saveAuthor(@RequestBody Author author) {
         logger.info("Adding new Author : {}", author);
@@ -109,14 +116,4 @@ public class AuthorController {
         logger.info("Founding Author with email {}.", email);
         return new ResponseEntity(HttpStatus.OK);
     }
-
-//    @PutMapping("/editAuthor/{id}") //zbedne
-//    public ResponseEntity editAuthor(@RequestBody Author author, @PathVariable Long id) {
-//        Author author1 = authorService.editAuthor(author, id);
-//        if (author1 == null) {
-//            return new ResponseEntity(HttpStatus.CONFLICT);
-//        }
-//        return new ResponseEntity(HttpStatus.OK);
-//    }
-
 }

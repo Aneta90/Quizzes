@@ -8,6 +8,7 @@ import pl.brainstorm.question.Controllers.AuthorController;
 import pl.brainstorm.question.Domain.Entities.QuestionsEntity;
 import pl.brainstorm.question.Domain.Repositories.QuestionsRepository;
 import pl.brainstorm.question.Models.Question;
+import pl.brainstorm.question.Models.Quiz;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,71 +20,50 @@ public class QuestionService {
     private final static Logger logger = LoggerFactory.getLogger(AuthorController.class);
     private final QuestionsRepository questionsRepository;
     private final MappingService mappingService;
-    private final QuizService quizService;
+    private final AnswerService answerService;
 
     @Autowired
-    public QuestionService(MappingService mappingService, QuestionsRepository questionsRepository,QuizService quizService) {
+    public QuestionService(QuestionsRepository questionsRepository, MappingService mappingService,
+                           AnswerService answerService) {
         this.questionsRepository = questionsRepository;
         this.mappingService = mappingService;
-        this.quizService = quizService;
+        this.answerService = answerService;
     }
 
-    public List<Question> getListOfQuestions(){
+    public List<Question> getListOfQuestions() {
         List<QuestionsEntity> questionsEntityList = questionsRepository.findAll();//findAllPagable??
         List<Question> questionList = new ArrayList<>();
-        for(QuestionsEntity questionsEntity:questionsEntityList){
+        for (QuestionsEntity questionsEntity : questionsEntityList) {
             questionList.add(mappingService.map(questionsEntity));
         }
         return questionList;
     }
 
-    public List<Question> getListOfQuestionsInGivenQuizById(Long id){
-        List<QuestionsEntity> questionsEntityList = questionsRepository.findAllQuestionsByQuizId(id);
+    public List<Question> getListOfQuestionsInGivenQuizByName(String quizName) {
+        List<QuestionsEntity> questionsEntityList = questionsRepository.findAllQuestionsByQuizName(quizName);
         List<Question> questionList = new ArrayList<>();
-        for(QuestionsEntity questionsEntity:questionsEntityList){
-            questionList.add(mappingService.map(questionsEntity));
-        }
-        return questionList;
-    }
-
-
-    public List<Question> getListOfQuestionsInGivenQuizByName(String quizName){
-        Long quizId = quizService.findByNameAndReturnId(quizName);
-        List<QuestionsEntity> questionsEntityList = questionsRepository.findAllQuestionsByQuizId(quizId);
-        List<Question> questionList = new ArrayList<>();
-        for(QuestionsEntity questionsEntity:questionsEntityList){
+        for (QuestionsEntity questionsEntity : questionsEntityList) {
             questionList.add(mappingService.map(questionsEntity));
         }
 
         return questionList;
     }
 
-    public Long addQuestion(Question question){
-    return questionsRepository.save(mappingService.map(question)).getId();
+    public Long addQuestion(Question question) {
+        return questionsRepository.save(mappingService.map(question)).getId();
     }
 
-    public Boolean doesQuestionExist(Question question){
+    public Long calculateTotalScoreInQuestion(Question question) {
+        Long tempToCalcScore = 0L;
+        for (int i = 0; i < question.getAnswerList().size(); i++) {
+            tempToCalcScore = answerService.calculateTotalScoreInAnswer(question.getAnswerList().get(i));
+        }
+        return tempToCalcScore;
+    }
+
+    public Boolean doesQuestionExist(Question question) {
         QuestionsEntity questionsEntity = mappingService.map(question);
         return questionsRepository.existsById(questionsEntity.getId());
     }
 
-    public Question editQuestion(Long id,Question question){
-        if(questionsRepository.existsById(id)) {
-            QuestionsEntity questionsEntity = questionsRepository.getOne(id);
-            questionsEntity.setContent(question.getContent());
-            questionsRepository.save(questionsEntity);
-            return mappingService.map(questionsEntity);
-        }
-        return null;
-    }
-
-    public Boolean removeQuestion(Long id){
-
-        boolean isDeleted = false;
-        if(questionsRepository.existsById(id)){
-            questionsRepository.deleteById(id);
-            isDeleted = true;
-        }
-        return isDeleted;
-    }
 }

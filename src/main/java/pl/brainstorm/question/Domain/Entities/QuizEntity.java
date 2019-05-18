@@ -26,6 +26,7 @@ public class QuizEntity implements Serializable {
 
     private int sizeOfQuestionList;
     private int numberOfSolved;
+
     public QuizEntity() {
     }
 
