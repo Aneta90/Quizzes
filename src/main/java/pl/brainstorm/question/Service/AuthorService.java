@@ -3,17 +3,12 @@ package pl.brainstorm.question.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.brainstorm.question.Domain.Entities.AuthorEntity;
-import pl.brainstorm.question.Domain.Entities.QuizEntity;
 import pl.brainstorm.question.Domain.Repositories.AuthorRepository;
 import pl.brainstorm.question.Models.Author;
-import pl.brainstorm.question.Models.Question;
 import pl.brainstorm.question.Models.Quiz;
 
-
-import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -22,9 +17,6 @@ public class AuthorService {
     private final AuthorRepository authorRepository;
 
     private final MappingService mappingService;
-
-    @Autowired
-    private EntityManager entityManager;
 
     @Autowired
     public AuthorService(AuthorRepository authorRepository, MappingService mappingService) {
@@ -107,7 +99,7 @@ public class AuthorService {
         authorEntity.setSurname(author.getSurname());
         authorEntity.setEmail(author.getEmail());
         authorEntity.setQuizListSize(author.getQuizListSize());
-//        entityManager.flush();
+
         authorEntity.getQuizEntityList()
                 .add(mappingService.map(author.getQuizList().get(author.getQuizList().size() - 1)));
 
