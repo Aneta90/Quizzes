@@ -16,7 +16,7 @@ CREATE TABLE authors (
                       id BIGINT NOT NULL auto_increment,
                       name VARCHAR(255),
                       surname VARCHAR(255),
-                      email VARCHAR(255),
+                      email VARCHAR(255) unique,
                       quizListSize BIGINT,
                       CONSTRAINT PK_Authors PRIMARY KEY (id));
 
@@ -28,7 +28,7 @@ CREATE TABLE question (
 
 CREATE TABLE quiz(
   id BIGINT NOT NULL auto_increment,
-  name VARCHAR(255),
+  name VARCHAR(255) unique,
   sizeOfQuestionList BIGINT,
   numberOfSolved BIGINT,
   CONSTRAINT PK_Quiz PRIMARY KEY (id));

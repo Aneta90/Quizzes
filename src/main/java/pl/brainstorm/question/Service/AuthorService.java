@@ -10,6 +10,8 @@ import pl.brainstorm.question.Models.Question;
 import pl.brainstorm.question.Models.Quiz;
 
 
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -20,6 +22,9 @@ public class AuthorService {
     private final AuthorRepository authorRepository;
 
     private final MappingService mappingService;
+
+    @Autowired
+    private EntityManager entityManager;
 
     @Autowired
     public AuthorService(AuthorRepository authorRepository, MappingService mappingService) {
@@ -94,26 +99,26 @@ public class AuthorService {
         return authorRepository.existsById(authorEntity.getId());
     }
 
-    public Author editAuthor(Author author) {
+    @Transactional
+    public Author editAuthor(Author author) { //id author and quiz
         AuthorEntity authorEntity = authorRepository.findByEmail(author.getEmail());
 
         authorEntity.setName(author.getName());
         authorEntity.setSurname(author.getSurname());
         authorEntity.setEmail(author.getEmail());
         authorEntity.setQuizListSize(author.getQuizListSize());
-        List<QuizEntity> quizEntityList = new ArrayList<>();
-        for (int i = 0; i < author.getQuizList().size(); i++) {
-            quizEntityList.add(mappingService.map(author.getQuizList().get(i)));
-        }
-        authorEntity.setQuizEntityList(quizEntityList);
+//        entityManager.flush();
+        authorEntity.getQuizEntityList()
+                .add(mappingService.map(author.getQuizList().get(author.getQuizList().size() - 1)));
+
         authorRepository.save(authorEntity);
         return author;
     }
 
     public Author addQuizToGivenAuthor(Author author, Quiz quiz) {
-        quiz.setSizeOfQuestionList(0);
+        quiz.setSizeOfQuestionList(quiz.getQuestionsList().size());
         author.getQuizList().add(quiz);
-        author.setQuizListSize(author.getQuizListSize()+1);
+        author.setQuizListSize(author.getQuizListSize() + 1);
         return author;
     }
 

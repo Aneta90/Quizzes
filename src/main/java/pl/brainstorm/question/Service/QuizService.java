@@ -78,7 +78,7 @@ public class QuizService {
 
     public List<ChartEntry> getListOfMostPopularQuizzes() { //chart zwraca listę 5 najbardziej popularnych quizow
 
-        List<QuizEntity> quizEntityList = quizRepository.findAllByNumberOfSolvedOrderByNumberOfSolved();
+        List<QuizEntity> quizEntityList = quizRepository.findAllOrderByNumberOfSolved();
         List<Quiz> quizList = new ArrayList<>();
         for (QuizEntity quizEntity : quizEntityList) {
             quizList.add(mappingService.map(quizEntity));
