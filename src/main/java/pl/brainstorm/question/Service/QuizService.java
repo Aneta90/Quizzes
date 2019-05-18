@@ -34,14 +34,14 @@ public class QuizService {
         return quizList;
     }
 
-    public List<Quiz> getListOfQuizzesByAuthorId(Long id) {
-        List<QuizEntity> quizEntityList = quizRepository.findAllByAuthorId(id);
-        List<Quiz> quizList = new ArrayList<>();
-        for (QuizEntity quizEntity : quizEntityList) {
-            quizList.add(mappingService.map(quizEntity));
-        }
-        return quizList;
-    }
+   // public List<Quiz> getListOfQuizzesByAuthorId(Long id) {
+//        List<QuizEntity> quizEntityList = quizRepository.findAllByAuthorId(id);
+//        List<Quiz> quizList = new ArrayList<>();
+//        for (QuizEntity quizEntity : quizEntityList) {
+//            quizList.add(mappingService.map(quizEntity));
+//        }
+//        return quizList;
+//    }
 
     public List<Quiz> getListOfQuizzesWithNumberOfQuestionsGreaterThen(int numberOfQuestions) {
         List<QuizEntity> quizEntityList = quizRepository.findAllBySizeOfQuestionListGreaterThanEqual(numberOfQuestions);
@@ -115,7 +115,6 @@ public class QuizService {
 
     public Quiz addNewQuestionToQuiz(Quiz quiz, Question question) {
         QuizEntity quizEntity = quizRepository.findByName(quiz.getName());
-       //prawdopodobnie zbedne do sprawdzenia
         quizEntity.setTotalScore(quiz.getTotalScore());
         quizEntity.setNumberOfSolved(quiz.getNumberOfSolved());
         quizEntity.getQuestionsList().add(mappingService.map(question));

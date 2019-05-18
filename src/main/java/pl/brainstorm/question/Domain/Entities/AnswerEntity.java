@@ -21,12 +21,14 @@ public class AnswerEntity implements Serializable {
     private Boolean isCCorrect;
     private Boolean isDCorrect;
 
+    private String answerFromUser;
+
     public AnswerEntity() {
     }
 
-    public AnswerEntity( String answerA, String answerB, String answerC,
-                        String answerD, Boolean isACorrect, Boolean isBCorrect, Boolean isCCorrect,
-                        Boolean isDCorrect) {
+    public AnswerEntity(String answerA, String answerB, String answerC,
+                        String answerD, Boolean isACorrect, Boolean isBCorrect,
+                        Boolean isCCorrect, Boolean isDCorrect, String answerFromUser) {
         this.answerA = answerA;
         this.answerB = answerB;
         this.answerC = answerC;
@@ -35,6 +37,7 @@ public class AnswerEntity implements Serializable {
         this.isBCorrect = isBCorrect;
         this.isCCorrect = isCCorrect;
         this.isDCorrect = isDCorrect;
+        this.answerFromUser = answerFromUser;
     }
 
     public Long getId() {
@@ -107,6 +110,15 @@ public class AnswerEntity implements Serializable {
 
     public void setDCorrect(Boolean DCorrect) {
         isDCorrect = DCorrect;
+    }
+
+
+    public String getAnswerFromUser() {
+        return answerFromUser;
+    }
+
+    public void setAnswerFromUser(String answerFromUser) {
+        this.answerFromUser = answerFromUser;
     }
 
     @Override

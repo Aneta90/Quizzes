@@ -21,7 +21,6 @@ import java.util.List;
 public class QuizController {
 
     private final static Logger logger = LoggerFactory.getLogger(QuizController.class);
-
     private final QuizService quizService;
     private final AuthorService authorService;
 
@@ -30,7 +29,6 @@ public class QuizController {
         this.quizService = quizService;
         this.authorService = authorService;
     }
-
 
     @GetMapping("/getListOfQuiz")
     public ResponseEntity getListOfQuizzes() {
@@ -43,16 +41,16 @@ public class QuizController {
         return new ResponseEntity<>(quizList, HttpStatus.OK);
     }
 
-    @GetMapping("/getListOfQuizzesByAuthor/{id}")
-    public ResponseEntity getListOfQuizzesByAuthorId(@PathVariable Long id) {
-        List<Quiz> quizList = quizService.getListOfQuizzesByAuthorId(id);
-        if (quizList.isEmpty()) {
-            logger.info("There isn't any quiz made by author with id {}.", id);
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
-        }
-        logger.info("List of quizzes made by author with id {}.", id);
-        return new ResponseEntity<>(quizList, HttpStatus.OK);
-    }
+//    @GetMapping("/getListOfQuizzesByAuthor/{id}")
+//    public ResponseEntity getListOfQuizzesByAuthorId(@PathVariable Long id) {
+//        List<Quiz> quizList = quizService.getListOfQuizzesByAuthorId(id);
+//        if (quizList.isEmpty()) {
+//            logger.info("There isn't any quiz made by author with id {}.", id);
+//            return new ResponseEntity(HttpStatus.NOT_FOUND);
+//        }
+//        logger.info("List of quizzes made by author with id {}.", id);
+//        return new ResponseEntity<>(quizList, HttpStatus.OK);
+//    }
 
     @GetMapping("/singleQuiz/{name}")
     public ResponseEntity getSingleQuizWithGivenName(@PathVariable String name) {

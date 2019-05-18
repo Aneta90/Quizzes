@@ -112,6 +112,7 @@ public class MappingService {
         answer.setBCorrect(answerEntity.getBCorrect());
         answer.setCCorrect(answerEntity.getCCorrect());
         answer.setDCorrect(answerEntity.getDCorrect());
+        answer.setAnswerFromUser(answerEntity.getAnswerFromUser());
         return answer;
     }
 
@@ -126,7 +127,7 @@ public class MappingService {
         answerEntity.setCCorrect(answer.getCCorrect());
         answerEntity.setAnswerD(answer.getAnswerD());
         answerEntity.setDCorrect(answer.getDCorrect());
-
+        answerEntity.setAnswerFromUser(answer.getAnswerFromUser());
         return answerEntity;
     }
 

@@ -10,7 +10,7 @@ import pl.brainstorm.question.Service.AuthorService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class QuestionApplicationTests {
+public class QuestionApplicationTests { //integracyjne testy
 
 	@Autowired
 	private AuthorService service;
@@ -19,6 +19,7 @@ public class QuestionApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		//repository.save();
 
 	}
 

@@ -102,25 +102,25 @@ public class AuthorService {
         return authorRepository.existsById(authorEntity.getId());
     }
 
-    public Author editAuthor(Author author, Long id) {
-        List<AuthorEntity> authorEntityList = authorRepository.findAllById(Collections.singleton(id));
-        if (authorEntityList.size() != 1) {
-            return null;
-        }
-        AuthorEntity authorEntity = authorEntityList.get(0);
-        authorEntity.setName(author.getName());
-        authorEntity.setSurname(author.getSurname());
-        authorEntity.setEmail(author.getEmail());
-        authorEntity.setQuizListSize(author.getQuizListSize());
-        List<QuizEntity> quizEntityList = new ArrayList<>();
-
-        for (int i = 0; i < author.getQuizList().size(); i++) {
-            quizEntityList.add(mappingService.map(author.getQuizList().get(i)));
-        }
-        authorEntity.setQuizEntityList(quizEntityList);
-        authorRepository.save(authorEntity);
-        return author;
-    }
+//    public Author editAuthor(Author author, Long id) {
+//        List<AuthorEntity> authorEntityList = authorRepository.findAllById(Collections.singleton(id));
+//        if (authorEntityList.size() != 1) {
+//            return null;
+//        }
+//        AuthorEntity authorEntity = authorEntityList.get(0);
+//        authorEntity.setName(author.getName());
+//        authorEntity.setSurname(author.getSurname());
+//        authorEntity.setEmail(author.getEmail());
+//        authorEntity.setQuizListSize(author.getQuizListSize());
+//        List<QuizEntity> quizEntityList = new ArrayList<>();
+//
+//        for (int i = 0; i < author.getQuizList().size(); i++) {
+//            quizEntityList.add(mappingService.map(author.getQuizList().get(i)));
+//        }
+//        authorEntity.setQuizEntityList(quizEntityList);
+//        authorRepository.save(authorEntity);
+//        return author;
+//    }
 
     public Author editAuthor(Author author) {
         AuthorEntity authorEntity = authorRepository.findByEmail(author.getEmail());
@@ -141,6 +141,7 @@ public class AuthorService {
     public Author addQuizToGivenAuthor(Author author, Quiz quiz) {
         quiz.setSizeOfQuestionList(0);
         author.getQuizList().add(quiz);
+        author.setQuizListSize(author.getQuizListSize()+1);
         return author;
     }
 
