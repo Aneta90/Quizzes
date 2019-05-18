@@ -120,7 +120,7 @@ public class QuizService {
     }
 
 
-    public Boolean deleteGuiz(Quiz quiz) {
+    public Boolean deleteQuiz(Quiz quiz) {
         quizRepository.delete(mappingService.map(quiz));
         return !isQuizInDataBase(quiz.getName());
     }

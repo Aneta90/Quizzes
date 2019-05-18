@@ -1,8 +1,6 @@
 package pl.brainstorm.question.Models;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 public class Answer {
 
 
@@ -10,14 +8,11 @@ public class Answer {
     private String answerB;
     private String answerC;
     private String answerD;
-    @JsonIgnore
-    private Boolean isACorrect;
-    @JsonIgnore
-    private Boolean isBCorrect;
-    @JsonIgnore
-    private Boolean isCCorrect;
-    @JsonIgnore
-    private Boolean isDCorrect;
+
+    private boolean aCorrect;
+    private boolean isBCorrect;
+    private boolean isCCorrect;
+    private boolean isDCorrect;
 
     private String answerFromUser;
 
@@ -26,13 +21,13 @@ public class Answer {
 
 
     public Answer(String answerA, String answerB, String answerC, String answerD,
-                  Boolean isACorrect, Boolean isBCorrect, Boolean isCCorrect,
-                  Boolean isDCorrect, String answerFromUser) {
+                  boolean isACorrect, boolean isBCorrect, boolean isCCorrect,
+                  boolean isDCorrect, String answerFromUser) {
         this.answerA = answerA;
         this.answerB = answerB;
         this.answerC = answerC;
         this.answerD = answerD;
-        this.isACorrect = isACorrect;
+        this.aCorrect = isACorrect;
         this.isBCorrect = isBCorrect;
         this.isCCorrect = isCCorrect;
         this.isDCorrect = isDCorrect;
@@ -71,35 +66,35 @@ public class Answer {
         this.answerD = answerD;
     }
 
-    public Boolean getACorrect() {
-        return isACorrect;
+    public boolean getACorrect() {
+        return aCorrect;
     }
 
-    public void setACorrect(Boolean ACorrect) {
-        isACorrect = ACorrect;
+    public void setACorrect(boolean ACorrect) {
+        aCorrect = ACorrect;
     }
 
-    public Boolean getBCorrect() {
+    public boolean getBCorrect() {
         return isBCorrect;
     }
 
-    public void setBCorrect(Boolean BCorrect) {
+    public void setBCorrect(boolean BCorrect) {
         isBCorrect = BCorrect;
     }
 
-    public Boolean getCCorrect() {
+    public boolean getCCorrect() {
         return isCCorrect;
     }
 
-    public void setCCorrect(Boolean CCorrect) {
+    public void setCCorrect(boolean CCorrect) {
         isCCorrect = CCorrect;
     }
 
-    public Boolean getDCorrect() {
+    public boolean getDCorrect() {
         return isDCorrect;
     }
 
-    public void setDCorrect(Boolean DCorrect) {
+    public void setDCorrect(boolean DCorrect) {
         isDCorrect = DCorrect;
     }
 
@@ -118,7 +113,7 @@ public class Answer {
                 ", answerB='" + answerB + '\'' +
                 ", answerC='" + answerC + '\'' +
                 ", answerD='" + answerD + '\'' +
-                ", isACorrect=" + isACorrect +
+                ", aCorrect=" + aCorrect +
                 ", isBCorrect=" + isBCorrect +
                 ", isCCorrect=" + isCCorrect +
                 ", isDCorrect=" + isDCorrect +

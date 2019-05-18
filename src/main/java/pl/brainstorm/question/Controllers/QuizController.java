@@ -140,7 +140,7 @@ public class QuizController {
     public ResponseEntity deleteQuizWithGivenNameInGivenAuthor(@PathVariable String email, @PathVariable String quizName) {
         if (authorService.isAuthorInDatabase(email) && quizService.isQuizInDataBase(quizName)) {
             Quiz quiz = quizService.getSingleQuizWithGivenName(quizName);
-            Boolean isDeleted = quizService.deleteGuiz(quiz);
+            Boolean isDeleted = quizService.deleteQuiz(quiz);
             if (isDeleted) {
                 return new ResponseEntity(HttpStatus.OK);
             }
@@ -149,9 +149,9 @@ public class QuizController {
         return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/theMostPopularQuizzes")
-    public ResponseEntity listOfMostPopularQuizzes(){
-     return ResponseEntity();
-    }
+//    @GetMapping("/theMostPopularQuizzes")
+//    public ResponseEntity listOfMostPopularQuizzes(){
+//        return ResponseEntity();
+//    }
 }
 
