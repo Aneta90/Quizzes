@@ -3,8 +3,6 @@ package pl.brainstorm.question.Service;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class QuizServiceTest {
 
     @Before
