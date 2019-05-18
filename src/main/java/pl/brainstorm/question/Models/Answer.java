@@ -12,12 +12,14 @@ public class Answer {
     private Boolean isBCorrect;
     private Boolean isCCorrect;
     private Boolean isDCorrect;
+    private String answerFromUser;
 
     public Answer() {
     }
 
-    public Answer(String answerA, String answerB, String answerC, String answerD, Boolean isACorrect, Boolean isBCorrect, Boolean isCCorrect, Boolean isDCorrect) {
-
+    public Answer(String answerA, String answerB, String answerC, String answerD,
+                  Boolean isACorrect, Boolean isBCorrect, Boolean isCCorrect,
+                  Boolean isDCorrect, String answerFromUser) {
         this.answerA = answerA;
         this.answerB = answerB;
         this.answerC = answerC;
@@ -26,8 +28,8 @@ public class Answer {
         this.isBCorrect = isBCorrect;
         this.isCCorrect = isCCorrect;
         this.isDCorrect = isDCorrect;
+        this.answerFromUser = answerFromUser;
     }
-
 
     public String getAnswerA() {
         return answerA;
@@ -91,6 +93,14 @@ public class Answer {
 
     public void setDCorrect(Boolean DCorrect) {
         isDCorrect = DCorrect;
+    }
+
+    public String getAnswerFromUser() {
+        return answerFromUser;
+    }
+
+    public void setAnswerFromUser(String answerFromUser) {
+        this.answerFromUser = answerFromUser;
     }
 
     @Override

@@ -56,7 +56,7 @@ public class QuestionsController {
     @GetMapping("/questionsListInGivenQuiz/{name}")
     public ResponseEntity questionsListInGivenQuizByName(@PathVariable String name) {
 
-        List<Question> questionList = questionService.getListOfQuestionsinGivenQuizByName(name);
+        List<Question> questionList = questionService.getListOfQuestionsInGivenQuizByName(name);
         if (questionList.isEmpty()) {
             logger.info("There are no questions for given quiz. Firstly, add quiz with given name or add questions to empty quiz!");
             return new ResponseEntity(HttpStatus.NO_CONTENT);
