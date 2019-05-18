@@ -158,4 +158,10 @@ public class QuizController {
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
     }
+
+    @GetMapping("/theMostPopularQuizzes")
+    public ResponseEntity listOfMostPopularQuizzes(){
+     return ResponseEntity();
+    }
 }
+

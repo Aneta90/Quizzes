@@ -25,7 +25,6 @@ public class AuthorController {
         this.authorService = authorService;
     }
 
-
     @GetMapping("/listOfAll")
     public ResponseEntity listOfAllAuthor() {
         List<Author> authorList = authorService.getListOfAuthor();

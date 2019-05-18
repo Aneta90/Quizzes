@@ -106,7 +106,7 @@ public class Answer {
     @Override
     public String toString() {
         return "Answer{" +
-                ", answerA='" + answerA + '\'' +
+                "answerA='" + answerA + '\'' +
                 ", answerB='" + answerB + '\'' +
                 ", answerC='" + answerC + '\'' +
                 ", answerD='" + answerD + '\'' +
@@ -114,6 +114,7 @@ public class Answer {
                 ", isBCorrect=" + isBCorrect +
                 ", isCCorrect=" + isCCorrect +
                 ", isDCorrect=" + isDCorrect +
+                ", answerFromUser='" + answerFromUser + '\'' +
                 '}';
     }
 }

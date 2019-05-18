@@ -17,7 +17,6 @@ public class AuthorEntity implements Serializable {
     private String surname;
 
     @Email
-
     private String email;
 
     @OneToMany(cascade = CascadeType.ALL)

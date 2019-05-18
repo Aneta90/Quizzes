@@ -125,7 +125,6 @@ public class AnswerEntity implements Serializable {
     public String toString() {
         return "AnswerEntity{" +
                 "id=" + id +
-
                 ", answerA='" + answerA + '\'' +
                 ", answerB='" + answerB + '\'' +
                 ", answerC='" + answerC + '\'' +
@@ -134,6 +133,7 @@ public class AnswerEntity implements Serializable {
                 ", isBCorrect=" + isBCorrect +
                 ", isCCorrect=" + isCCorrect +
                 ", isDCorrect=" + isDCorrect +
+                ", answerFromUser='" + answerFromUser + '\'' +
                 '}';
     }
 }
