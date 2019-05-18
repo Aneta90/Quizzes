@@ -41,17 +41,6 @@ public class QuizController {
         return new ResponseEntity<>(quizList, HttpStatus.OK);
     }
 
-//    @GetMapping("/getListOfQuizzesByAuthor/{id}")
-//    public ResponseEntity getListOfQuizzesByAuthorId(@PathVariable Long id) {
-//        List<Quiz> quizList = quizService.getListOfQuizzesByAuthorId(id);
-//        if (quizList.isEmpty()) {
-//            logger.info("There isn't any quiz made by author with id {}.", id);
-//            return new ResponseEntity(HttpStatus.NOT_FOUND);
-//        }
-//        logger.info("List of quizzes made by author with id {}.", id);
-//        return new ResponseEntity<>(quizList, HttpStatus.OK);
-//    }
-
     @GetMapping("/singleQuiz/{name}")
     public ResponseEntity getSingleQuizWithGivenName(@PathVariable String name) {
         Quiz quiz = quizService.getSingleQuizWithGivenName(name);
@@ -133,17 +122,6 @@ public class QuizController {
         return new ResponseEntity<>(author, HttpStatus.OK);
     }
 
-    @DeleteMapping("/deleteQuiz/{id}")
-    public ResponseEntity removeQuiz(@PathVariable Long id) {
-        boolean isDeleted = quizService.removeQuiz(id);
-        if (!isDeleted) {
-            logger.info("Quiz with id {}, isn't deleted", id);
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
-        }
-        logger.info("Quiz with id {}, is deleted", id);
-        return new ResponseEntity(HttpStatus.OK);
-    }
-
     @PutMapping("/editQuiz/email/{email}/quiz/{quizName}")
     public ResponseEntity editQuiz(@RequestBody Question question, @PathVariable String email, @PathVariable String quizName) {
         if (authorService.isAuthorInDatabase(email)) {
@@ -154,9 +132,21 @@ public class QuizController {
             author = authorService.editQuizInGivenAuthor(author, quiz);
             return new ResponseEntity<>(author, HttpStatus.OK);
         } else {
-            // ...
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/editQuiz/email/{email}/quiz/{quizName}")
+    public ResponseEntity deleteQuizWithGivenNameInGivenAuthor(@PathVariable String email, @PathVariable String quizName) {
+        if (authorService.isAuthorInDatabase(email) && quizService.isQuizInDataBase(quizName)) {
+            Quiz quiz = quizService.getSingleQuizWithGivenName(quizName);
+            Boolean isDeleted = quizService.deleteGuiz(quiz);
+            if (isDeleted) {
+                return new ResponseEntity(HttpStatus.OK);
+            }
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/theMostPopularQuizzes")

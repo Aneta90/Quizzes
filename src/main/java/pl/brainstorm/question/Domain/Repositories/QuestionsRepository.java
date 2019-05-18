@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import pl.brainstorm.question.Domain.Entities.QuestionsEntity;
+import pl.brainstorm.question.Models.Question;
 
 import java.util.List;
 
@@ -13,9 +14,8 @@ public interface QuestionsRepository extends JpaRepository<QuestionsEntity, Long
     @Query("Select q.questionsList from QuizEntity q where q.id = ?1")
     List<QuestionsEntity> findAllQuestionsByQuizId (Long id);
 
-
-
-
+    @Query("Select q.questionsList from QuizEntity q where q.name = ?1")
+    List<QuestionsEntity> findAllQuestionsByQuizName (String name);
 
 
 }

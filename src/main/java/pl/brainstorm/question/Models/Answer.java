@@ -1,6 +1,8 @@
 package pl.brainstorm.question.Models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Answer {
 
 
@@ -8,14 +10,20 @@ public class Answer {
     private String answerB;
     private String answerC;
     private String answerD;
+    @JsonIgnore
     private Boolean isACorrect;
+    @JsonIgnore
     private Boolean isBCorrect;
+    @JsonIgnore
     private Boolean isCCorrect;
+    @JsonIgnore
     private Boolean isDCorrect;
+
     private String answerFromUser;
 
     public Answer() {
     }
+
 
     public Answer(String answerA, String answerB, String answerC, String answerD,
                   Boolean isACorrect, Boolean isBCorrect, Boolean isCCorrect,
