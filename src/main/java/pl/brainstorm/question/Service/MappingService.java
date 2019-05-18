@@ -108,7 +108,7 @@ public class MappingService {
         answer.setAnswerB(answerEntity.getAnswerB());
         answer.setAnswerC(answerEntity.getAnswerC());
         answer.setAnswerD(answerEntity.getAnswerD());
-        answer.setACorrect(answerEntity.getACorrect());
+        answer.setACorrect(answerEntity.getaCorrect());
         answer.setBCorrect(answerEntity.getBCorrect());
         answer.setCCorrect(answerEntity.getCCorrect());
         answer.setDCorrect(answerEntity.getDCorrect());
@@ -120,7 +120,7 @@ public class MappingService {
 
         AnswerEntity answerEntity = new AnswerEntity();
         answerEntity.setAnswerA(answer.getAnswerA());
-        answerEntity.setACorrect(answer.getACorrect());
+        answerEntity.setaCorrect(answer.getACorrect());
         answerEntity.setAnswerB(answer.getAnswerB());
         answerEntity.setBCorrect(answer.getBCorrect());
         answerEntity.setAnswerC(answer.getAnswerC());
