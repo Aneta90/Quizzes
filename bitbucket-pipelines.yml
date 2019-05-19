@@ -20,4 +20,4 @@ pipelines:
           script:
             - mvn clean test
             - git filter-branch -- --all
-            - git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_TEST.git HEAD:master
+            - git push -f https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_TEST.git HEAD:master
