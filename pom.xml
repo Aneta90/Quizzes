@@ -11,7 +11,7 @@
 	<groupId>pl.brainstorm</groupId>
 	<artifactId>question</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>question</name>
 	<description>Quiz and survey server application</description>
 
