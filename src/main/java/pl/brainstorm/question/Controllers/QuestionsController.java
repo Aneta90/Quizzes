@@ -24,12 +24,12 @@ public class QuestionsController {
     private final QuestionService questionService;
 
     @Autowired
-    public QuestionsController(QuestionService questionService) {
+    private QuestionsController(QuestionService questionService) {
         this.questionService = questionService;
     }
 
     @GetMapping("/questionsList")
-    public ResponseEntity questionsList() {
+    ResponseEntity questionsList() {
 
         List<Question> questionsList = questionService.getListOfQuestions();
         if (questionsList.isEmpty()) {
@@ -41,7 +41,7 @@ public class QuestionsController {
     }
 
     @GetMapping("/questionsListInGivenQuiz/{name}")
-    public ResponseEntity questionsListInGivenQuizByName(@PathVariable String name) {
+    ResponseEntity questionsListInGivenQuizByName(@PathVariable String name) {
 
         List<Question> questionList = questionService.getListOfQuestionsInGivenQuizByName(name);
         if (questionList.isEmpty()) {
@@ -54,7 +54,7 @@ public class QuestionsController {
     }
 
     @PostMapping("/addQuestion")
-    public ResponseEntity<?> addQuestion(@RequestBody Question question) {
+    ResponseEntity<?> addQuestion(@RequestBody Question question) {
         logger.info("Adding question: {}", question);
         if (questionService.doesQuestionExist(question)) {
             logger.warn("There is exactly the same question in our database!.Question : {}", question);

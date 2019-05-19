@@ -109,10 +109,7 @@ public class QuizService {
 
     public Boolean isQuizInDataBase(String quizName) {
         List<QuizEntity> quizEntityList = quizRepository.findAllByName(quizName);
-        if (quizEntityList.size() != 1) {
-            return false;
-        }
-        return true;
+        return quizEntityList.size() == 1;
     }
 
     public Quiz getSingleQuizWithGivenName(String name) {
@@ -131,7 +128,7 @@ public class QuizService {
 
         Long tempToCalcScore = 0L;
         for (int i = 0; i < quiz.getQuestionsList().size(); i++) {
-            tempToCalcScore += questionService.calculateTotalScoreInQuestion(quiz.getQuestionsList().get(i));
+            tempToCalcScore += questionService.calculateTotalScoreInQuestion(quiz.getQuestionsList().get(i), quizEntity.getId());
         }
         List<Long> listOfTotalScore = quizEntity.getTotalScore();
         listOfTotalScore.add(tempToCalcScore);

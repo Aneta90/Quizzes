@@ -1,18 +1,16 @@
 package pl.brainstorm.question.Models;
 
-import java.util.List;
-
 public class Question {
 
     private String content;
-    private List<Answer> answerList;
+    private Answer answer;
 
     public Question() {
     }
 
-    public Question(String content, List<Answer> answerList) {
+    public Question(String content, Answer answer) {
         this.content = content;
-        this.answerList = answerList;
+        this.answer = answer;
     }
 
     public String getContent() {
@@ -23,19 +21,19 @@ public class Question {
         this.content = content;
     }
 
-    public List<Answer> getAnswerList() {
-        return answerList;
+    public Answer getAnswer() {
+        return answer;
     }
 
-    public void setAnswerList(List<Answer> answerList) {
-        this.answerList = answerList;
+    public void setAnswer(Answer answer) {
+        this.answer = answer;
     }
 
     @Override
     public String toString() {
         return "Question{" +
                 "content='" + content + '\'' +
-                ", answerList=" + answerList +
+                ", answer=" + answer +
                 '}';
     }
 }

@@ -53,11 +53,9 @@ public class QuestionService {
         return questionsRepository.save(mappingService.map(question)).getId();
     }
 
-    public Long calculateTotalScoreInQuestion(Question question) {
+    Long calculateTotalScoreInQuestion(Question question, Long quizId) {
         Long tempToCalcScore = 0L;
-        for (int i = 0; i < question.getAnswerList().size(); i++) {
-            tempToCalcScore += answerService.calculateTotalScoreInAnswer(question.getAnswerList().get(i));
-        }
+        tempToCalcScore += answerService.calculateTotalScoreInAnswer(question.getAnswer(), quizId);
         return tempToCalcScore;
     }
 

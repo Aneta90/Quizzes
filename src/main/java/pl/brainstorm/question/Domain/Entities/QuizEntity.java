@@ -2,8 +2,6 @@ package pl.brainstorm.question.Domain.Entities;
 
 import lombok.AccessLevel;
 import lombok.Setter;
-import org.hibernate.validator.constraints.UniqueElements;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;

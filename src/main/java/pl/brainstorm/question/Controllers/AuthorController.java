@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.brainstorm.question.Models.Author;
+import pl.brainstorm.question.Models.AuthorChart;
 import pl.brainstorm.question.Service.AuthorService;
 
 import java.util.List;
@@ -21,12 +22,12 @@ public class AuthorController {
     private final AuthorService authorService;
 
     @Autowired
-    public AuthorController(AuthorService authorService) {
+    AuthorController(AuthorService authorService) {
         this.authorService = authorService;
     }
 
     @GetMapping("/listOfAll")
-    public ResponseEntity listOfAllAuthor() {
+    ResponseEntity listOfAllAuthor() {
         List<Author> authorList = authorService.getListOfAuthor();
         if (authorList.isEmpty()) {
             logger.info("List of Author is empty.");
@@ -37,7 +38,7 @@ public class AuthorController {
     }
 
     @GetMapping("/getAuthor/{email}")
-    public ResponseEntity getSingleAuthorByEmail(@PathVariable String email) {
+    ResponseEntity getSingleAuthorByEmail(@PathVariable String email) {
         Author author = authorService.getAuthorByEmail(email);
         if (author.getName() == null) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
@@ -46,7 +47,7 @@ public class AuthorController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity saveAuthor(@RequestBody Author author) {
+    ResponseEntity saveAuthor(@RequestBody Author author) {
         logger.info("Adding new Author : {}", author);
         if (authorService.isAuthorInDatabase(author)) { // check by email
             logger.info("There is Author : {} in database.", author);
@@ -60,7 +61,7 @@ public class AuthorController {
     }
 
     @GetMapping("/numberQuizzesGreaterThen/{numberOfQuizzes}")
-    public ResponseEntity findAuthorsWithNumberOfQuizzesGreaterThen(@PathVariable int numberOfQuizzes) {
+    ResponseEntity findAuthorsWithNumberOfQuizzesGreaterThen(@PathVariable int numberOfQuizzes) {
         List<Author> authorList = authorService.findAuthorsWithNumberOfQuizzesGreaterThen(numberOfQuizzes);
         if (authorList.isEmpty()) {
             logger.info("No Author with number of Quizzes greater then {}. ", numberOfQuizzes);
@@ -71,7 +72,7 @@ public class AuthorController {
     }
 
     @GetMapping("/numberQuizzesLessThen/{numberOfQuizzes}")
-    public ResponseEntity findAuthorsWithNumberOfQuizzesLowerThen(@PathVariable int numberOfQuizzes) {
+    ResponseEntity findAuthorsWithNumberOfQuizzesLowerThen(@PathVariable int numberOfQuizzes) {
         List<Author> authorList = authorService.findAuthorsWithNumberOfQuizzesLowerThen(numberOfQuizzes);
         if (authorList.isEmpty()) {
             logger.info("No Author with number of Quizzes less then {}. ", numberOfQuizzes);
@@ -82,7 +83,7 @@ public class AuthorController {
     }
 
     @DeleteMapping("/removeAuthorById/{id}")
-    public ResponseEntity removeAuthorById(@PathVariable Long id) {
+    ResponseEntity removeAuthorById(@PathVariable Long id) {
         logger.info("Starting removing author with id {}.", id);
         boolean isRemoved = authorService.removeAuthorById(id);
         if (!isRemoved) {
@@ -94,7 +95,7 @@ public class AuthorController {
     }
 
     @DeleteMapping("/removeAuthorByEmail/{email}")
-    public ResponseEntity removeAuthorById(@PathVariable String email) {
+    ResponseEntity removeAuthorById(@PathVariable String email) {
         logger.info("Starting removing author with email {}.", email);
         boolean isRemoved = authorService.removeAuthorByEmail(email);
         if (!isRemoved) {
@@ -106,7 +107,7 @@ public class AuthorController {
     }
 
     @GetMapping("/isAuthorPresent/{email}")
-    public ResponseEntity isAuthorInDatabase(@PathVariable String email) {
+    ResponseEntity isAuthorInDatabase(@PathVariable String email) {
         logger.info("Checking is author with email {}, is in database", email);
         boolean isInDatabase = authorService.isAuthorWithEmailInDatabase(email);
         if (!isInDatabase) {
@@ -118,8 +119,8 @@ public class AuthorController {
     }
 
     @GetMapping("/theMostPopularAuthors")
-    public ResponseEntity listOfMostPopularQuizzes(){
-        List<Integer> quizList = authorService.theMostPopularAuthors();
+    ResponseEntity listOfMostPopularQuizzes(){
+        List<AuthorChart> quizList = authorService.theMostPopularAuthors();
         if (quizList.isEmpty()) {
             logger.info("There isn't any author in database {}.");
             return new ResponseEntity(HttpStatus.NOT_FOUND);

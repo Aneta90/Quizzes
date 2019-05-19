@@ -49,24 +49,14 @@ public class MappingService {
     public Question map(QuestionsEntity questionsEntity) {
         Question question = new Question();
         question.setContent(questionsEntity.getContent());
-
-        List<Answer> answerList = new ArrayList<>();
-        for (int i = 0; i < questionsEntity.getAnswerEntityList().size(); i++) {
-            answerList.add(map(questionsEntity.getAnswerEntityList().get(i)));
-        }
-        question.setAnswerList(answerList);
+        question.setAnswer(map(questionsEntity.getAnswerEntity()));
         return question;
     }
 
     public QuestionsEntity map(Question question) {
         QuestionsEntity questionsEntity = new QuestionsEntity();
         questionsEntity.setContent(question.getContent());
-
-        List<AnswerEntity> answerEntityList = new ArrayList<>();
-        for (int i = 0; i < question.getAnswerList().size(); i++) {
-            answerEntityList.add(map(question.getAnswerList().get(i)));
-        }
-        questionsEntity.setAnswerEntityList(answerEntityList);
+        questionsEntity.setAnswerEntity(map(question.getAnswer()));
         return questionsEntity;
     }
 

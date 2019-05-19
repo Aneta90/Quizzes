@@ -19,21 +19,21 @@ import java.util.List;
 @RestController
 @RequestMapping("/quiz")
 @CrossOrigin
-public class QuizController {
+class QuizController {
 
     private final static Logger logger = LoggerFactory.getLogger(QuizController.class);
     private final QuizService quizService;
     private final AuthorService authorService;
 
     @Autowired
-    public QuizController(QuizService quizService, AuthorService authorService) {
+    QuizController(QuizService quizService, AuthorService authorService) {
         this.quizService = quizService;
         this.authorService = authorService;
     }
 
     //GetMethod
     @GetMapping("/getListOfQuiz")
-    public ResponseEntity getListOfQuizzes() {
+    ResponseEntity getListOfQuizzes() {
         List<Quiz> quizList = quizService.getListOfQuizzes();
         if (quizList.isEmpty()) {
             logger.info("List of Quiz is empty.");
@@ -44,7 +44,7 @@ public class QuizController {
     }
 
     @GetMapping("/singleQuiz/{name}")
-    public ResponseEntity getSingleQuizWithGivenName(@PathVariable String name) {
+    ResponseEntity getSingleQuizWithGivenName(@PathVariable String name) {
         Quiz quiz = quizService.getSingleQuizWithGivenName(name);
         if (quiz == null) {
             logger.info("There isn't any Quiz with name : {}", name);
@@ -55,7 +55,7 @@ public class QuizController {
     }
 
     @GetMapping("/listOfQuizzesWithQuestionsGreaterThen/{numberOfQuestions}")
-    public ResponseEntity getListOfQuizzesWithNumberOfQuestionsGreaterThen(@PathVariable int numberOfQuestions) {
+    ResponseEntity getListOfQuizzesWithNumberOfQuestionsGreaterThen(@PathVariable int numberOfQuestions) {
         List<Quiz> quizList = quizService.getListOfQuizzesWithNumberOfQuestionsGreaterThen(numberOfQuestions);
         if (quizList.isEmpty()) {
             logger.info("There isn't any quiz with number of questions greater then {}.", numberOfQuestions);
@@ -66,7 +66,7 @@ public class QuizController {
     }
 
     @GetMapping("/listOfQuizzesWithQuestionsLessThen/{numberOfQuestions}")
-    public ResponseEntity getListOfQuizzesWithNumberOfQuestionsLowerThen(@PathVariable int numberOfQuestions) {
+    ResponseEntity getListOfQuizzesWithNumberOfQuestionsLowerThen(@PathVariable int numberOfQuestions) {
         List<Quiz> quizList = quizService.getListOfQuizzesWithNumberOfQuestionsLowerThen(numberOfQuestions);
         if (quizList.isEmpty()) {
             logger.info("There isn't any quiz with number of questions less then {}.", numberOfQuestions);
@@ -77,7 +77,7 @@ public class QuizController {
     }
 
     @GetMapping("/solvedMoreThen/{numberOfTries}")
-    public ResponseEntity getListOfQuizzesSolvedMoreThen(@PathVariable int numberOfTries) {
+    ResponseEntity getListOfQuizzesSolvedMoreThen(@PathVariable int numberOfTries) {
         List<Quiz> quizList = quizService.getListOfQuizzesSolvedMoreThen(numberOfTries);
         if (quizList.isEmpty()) {
             logger.info("There isn't any quiz with number of solved more then {}.", numberOfTries);
@@ -88,7 +88,7 @@ public class QuizController {
     }
 
     @GetMapping("/solvedLessThen/{numberOfTries}")
-    public ResponseEntity getListOfQuizzesSolveLessThen(@PathVariable int numberOfTries) {
+    ResponseEntity getListOfQuizzesSolveLessThen(@PathVariable int numberOfTries) {
         List<Quiz> quizList = quizService.getListOfQuizzesSolveLessThen(numberOfTries);
         if (quizList.isEmpty()) {
             logger.info("There isn't any quiz with number of solved less then {}.", numberOfTries);
@@ -99,7 +99,7 @@ public class QuizController {
     }
 
     @GetMapping("/listOfQuizzesSorted")
-    public ResponseEntity getListOfQuizzesByName() {
+    ResponseEntity getListOfQuizzesByName() {
         List<Quiz> quizList = quizService.getListOfQuizzesByName();
         if (quizList.isEmpty()) {
             logger.info("There isn't any quiz in database.");
@@ -110,7 +110,7 @@ public class QuizController {
     }
 
     @GetMapping("/theMostPopularQuizzes")
-    public ResponseEntity listOfMostPopularQuizzes() {
+    ResponseEntity listOfMostPopularQuizzes() {
         List<ChartEntry> quizList = quizService.getListOfMostPopularQuizzes();
         if (quizList.isEmpty()) {
             logger.info("There isn't any quiz in database {}.");
@@ -124,7 +124,7 @@ public class QuizController {
 
     //PostMethod
     @PostMapping("/addQuiz/{email}")
-    public ResponseEntity addQuizToAuthorWithGivenEmail(@RequestBody Quiz quiz, @PathVariable String email) {
+    ResponseEntity addQuizToAuthorWithGivenEmail(@RequestBody Quiz quiz, @PathVariable String email) {
         if (quizService.isQuizInDataBase(quiz.getName())) {
             logger.info("There is quiz on database name like quiz you try to add, name : {}", quiz.getName());
             return new ResponseEntity(HttpStatus.CONFLICT);
@@ -139,7 +139,7 @@ public class QuizController {
     }
 
     @PostMapping("/totalScore")
-    public ResponseEntity returnTotalScoreForGivenQuiz(@RequestBody Quiz quiz) {
+    ResponseEntity returnTotalScoreForGivenQuiz(@RequestBody Quiz quiz) {
         Long totalScore = quizService.calculateTotalScore(quiz);
         if (totalScore == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -149,7 +149,7 @@ public class QuizController {
 
     //PutMethod
     @PutMapping("/editQuiz/email/{email}/quiz/{quizName}")
-    public ResponseEntity editQuiz(@RequestBody Question question, @PathVariable String email, @PathVariable String quizName) {
+    ResponseEntity editQuiz(@RequestBody Question question, @PathVariable String email, @PathVariable String quizName) {
         if (authorService.isAuthorInDatabase(email)) {
             Author author = authorService.getAuthorByEmail(email);
             Quiz quiz = quizService.getSingleQuizWithGivenName(quizName);
@@ -164,7 +164,7 @@ public class QuizController {
 
     //DeleteMethod
     @DeleteMapping("/editQuiz/email/{email}/quiz/{quizName}")
-    public ResponseEntity deleteQuizWithGivenNameInGivenAuthor(@PathVariable String email, @PathVariable String quizName) {
+    ResponseEntity deleteQuizWithGivenNameInGivenAuthor(@PathVariable String email, @PathVariable String quizName) {
         if (authorService.isAuthorInDatabase(email) && quizService.isQuizInDataBase(quizName)) {
             Quiz quiz = quizService.getSingleQuizWithGivenName(quizName);
             Boolean isDeleted = quizService.deleteQuiz(quiz);

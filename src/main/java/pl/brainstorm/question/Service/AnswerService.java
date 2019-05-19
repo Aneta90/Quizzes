@@ -29,25 +29,20 @@ public class AnswerService {
         return answerRepository.existsById(answerEntity.getId());
     }
 
-    public Long calculateTotalScoreInAnswer(Answer answer) {
-        Long temp = 0L;
-        for (int i = 0; i < 4; i++) {
+    Long calculateTotalScoreInAnswer(Answer answer, Long quizId) {
+        long temp = 0L;
             if (answer.getACorrect() && answer.getAnswerFromUser().equals("A")) {
                 temp += 1L;
-                return temp;
             } else if (answer.getBCorrect() && answer.getAnswerFromUser().equals("B")) {
                 temp += 1L;
-                return temp;
             } else if (answer.getCCorrect() && answer.getAnswerFromUser().equals("C")) {
                 temp += 1L;
-                return temp;
             } else if (answer.getDCorrect() && answer.getAnswerFromUser().equals("D")) {
                 temp += 1L;
-                return temp;
-            }
         }
         return temp;
     }
+
 
 }
 

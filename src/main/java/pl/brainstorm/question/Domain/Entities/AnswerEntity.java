@@ -3,7 +3,6 @@ package pl.brainstorm.question.Domain.Entities;
 import javax.persistence.*;
 import java.io.Serializable;
 
-
 @Table(name = "Answer")
 @Entity
 public class AnswerEntity implements Serializable {
@@ -16,6 +15,7 @@ public class AnswerEntity implements Serializable {
     private String answerB;
     private String answerC;
     private String answerD;
+
     private Boolean aCorrect;
     private Boolean isBCorrect;
     private Boolean isCCorrect;
@@ -111,7 +111,6 @@ public class AnswerEntity implements Serializable {
     public void setDCorrect(Boolean DCorrect) {
         isDCorrect = DCorrect;
     }
-
 
     public String getAnswerFromUser() {
         return answerFromUser;

@@ -2,8 +2,6 @@ package pl.brainstorm.question.Domain.Entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
-
 
 @Table(name = "Questions")
 @Entity
@@ -14,16 +12,15 @@ public class QuestionsEntity implements Serializable {
 
     private String content;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<AnswerEntity> answerEntityList;
-
+    @OneToOne(cascade = CascadeType.ALL)
+    private AnswerEntity answerEntity;
 
     public QuestionsEntity() {
     }
 
-    public QuestionsEntity( String content, List<AnswerEntity> answerEntityList) {
+    public QuestionsEntity(String content, AnswerEntity answerEntity) {
         this.content = content;
-        this.answerEntityList = answerEntityList;
+        this.answerEntity = answerEntity;
     }
 
     public Long getId() {
@@ -42,21 +39,20 @@ public class QuestionsEntity implements Serializable {
         this.content = content;
     }
 
-    public List<AnswerEntity> getAnswerEntityList() {
-        return answerEntityList;
+    public AnswerEntity getAnswerEntity() {
+        return answerEntity;
     }
 
-    public void setAnswerEntityList(List<AnswerEntity> answerEntityList) {
-        this.answerEntityList = answerEntityList;
+    public void setAnswerEntity(AnswerEntity answerEntity) {
+        this.answerEntity = answerEntity;
     }
 
     @Override
     public String toString() {
         return "QuestionsEntity{" +
                 "id=" + id +
-
                 ", content='" + content + '\'' +
-                ", answerEntityList=" + answerEntityList +
+                ", answerEntity=" + answerEntity +
                 '}';
     }
 }

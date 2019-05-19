@@ -2,8 +2,8 @@ package pl.brainstorm.question.Models;
 
 public class ChartEntry {
 
-    String  name;
-    int result;
+    private String  name;
+    private int result;
 
     public ChartEntry() {
     }

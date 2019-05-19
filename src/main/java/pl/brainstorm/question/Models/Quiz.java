@@ -1,7 +1,5 @@
 package pl.brainstorm.question.Models;
 
-import org.hibernate.validator.constraints.UniqueElements;
-
 import java.util.List;
 
 public class Quiz {

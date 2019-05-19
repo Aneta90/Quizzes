@@ -1,8 +1,6 @@
 package pl.brainstorm.question.Models;
 
-
 public class Answer {
-
 
     private String answerA;
     private String answerB;
