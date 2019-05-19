@@ -10,8 +10,6 @@ import pl.brainstorm.question.Models.Question;
 import pl.brainstorm.question.Models.Quiz;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -75,7 +73,6 @@ public class QuizService {
         return quizList;
     }
 
-
     public List<ChartEntry> getListOfMostPopularQuizzes() { //chart zwraca listę 5 najbardziej popularnych quizow
 
         List<QuizEntity> quizEntityList = quizRepository.findAllOrderByNumberOfSolved();
@@ -126,17 +123,23 @@ public class QuizService {
         return mappingService.map(quizEntityList.get(0));
     }
 
-    public Quiz calculateTotalScore(Quiz quiz) {
+    public Long calculateTotalScore(Quiz quiz) {
+        QuizEntity quizEntity = quizRepository.findByName(quiz.getName());
+        if (quizEntity.getId() == null) {
+            return null;
+        }
+
         Long tempToCalcScore = 0L;
         for (int i = 0; i < quiz.getQuestionsList().size(); i++) {
             tempToCalcScore += questionService.calculateTotalScoreInQuestion(quiz.getQuestionsList().get(i));
-
         }
-        List<Long> listOfTotalScore = quiz.getTotalScore();
+        List<Long> listOfTotalScore = quizEntity.getTotalScore();
         listOfTotalScore.add(tempToCalcScore);
-        return quiz;
+        quizEntity.setTotalScore(listOfTotalScore);
+        quizEntity.setNumberOfSolved(listOfTotalScore.size());
+        quizRepository.save(quizEntity);
+        return tempToCalcScore;
     }
-
 
     public Boolean deleteQuiz(Quiz quiz) {
         quizRepository.delete(mappingService.map(quiz));

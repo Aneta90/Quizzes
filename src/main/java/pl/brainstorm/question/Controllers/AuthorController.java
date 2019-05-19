@@ -81,7 +81,7 @@ public class AuthorController {
         return new ResponseEntity<>(authorList, HttpStatus.OK);
     }
 
-    @DeleteMapping("/removeAuthorById/{id}")  // zbedne
+    @DeleteMapping("/removeAuthorById/{id}")
     public ResponseEntity removeAuthorById(@PathVariable Long id) {
         logger.info("Starting removing author with id {}.", id);
         boolean isRemoved = authorService.removeAuthorById(id);
@@ -105,7 +105,7 @@ public class AuthorController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @GetMapping("/isAuthorPresent/{email}") // zbedne
+    @GetMapping("/isAuthorPresent/{email}")
     public ResponseEntity isAuthorInDatabase(@PathVariable String email) {
         logger.info("Checking is author with email {}, is in database", email);
         boolean isInDatabase = authorService.isAuthorWithEmailInDatabase(email);

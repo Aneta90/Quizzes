@@ -130,5 +130,4 @@ public class MappingService {
         answerEntity.setAnswerFromUser(answer.getAnswerFromUser());
         return answerEntity;
     }
-
 }

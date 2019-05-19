@@ -8,11 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.brainstorm.question.Models.Answer;
-import pl.brainstorm.question.Models.Question;
 import pl.brainstorm.question.Service.AnswerService;
 import pl.brainstorm.question.Util.CustomError;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/answers")

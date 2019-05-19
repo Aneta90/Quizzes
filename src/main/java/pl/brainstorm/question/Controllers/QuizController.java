@@ -31,6 +31,7 @@ public class QuizController {
         this.authorService = authorService;
     }
 
+    //GetMethod
     @GetMapping("/getListOfQuiz")
     public ResponseEntity getListOfQuizzes() {
         List<Quiz> quizList = quizService.getListOfQuizzes();
@@ -105,9 +106,23 @@ public class QuizController {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
         logger.info("List of quiz sorted by name.");
-        return new ResponseEntity<>(quizList,HttpStatus.OK);
+        return new ResponseEntity<>(quizList, HttpStatus.OK);
     }
 
+    @GetMapping("/theMostPopularQuizzes")
+    public ResponseEntity listOfMostPopularQuizzes() {
+        List<ChartEntry> quizList = quizService.getListOfMostPopularQuizzes();
+        if (quizList.isEmpty()) {
+            logger.info("There isn't any quiz in database {}.");
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+        logger.info("List of quiz {}.", quizList);
+        return new ResponseEntity<>(quizList, HttpStatus.OK);
+
+    }
+
+
+    //PostMethod
     @PostMapping("/addQuiz/{email}")
     public ResponseEntity addQuizToAuthorWithGivenEmail(@RequestBody Quiz quiz, @PathVariable String email) {
         if (quizService.isQuizInDataBase(quiz.getName())) {
@@ -123,6 +138,16 @@ public class QuizController {
         return new ResponseEntity<>(author, HttpStatus.OK);
     }
 
+    @PostMapping("/totalScore")
+    public ResponseEntity returnTotalScoreForGivenQuiz(@RequestBody Quiz quiz) {
+        Long totalScore = quizService.calculateTotalScore(quiz);
+        if (totalScore == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(totalScore, HttpStatus.OK);
+    }
+
+    //PutMethod
     @PutMapping("/editQuiz/email/{email}/quiz/{quizName}")
     public ResponseEntity editQuiz(@RequestBody Question question, @PathVariable String email, @PathVariable String quizName) {
         if (authorService.isAuthorInDatabase(email)) {
@@ -137,6 +162,7 @@ public class QuizController {
         }
     }
 
+    //DeleteMethod
     @DeleteMapping("/editQuiz/email/{email}/quiz/{quizName}")
     public ResponseEntity deleteQuizWithGivenNameInGivenAuthor(@PathVariable String email, @PathVariable String quizName) {
         if (authorService.isAuthorInDatabase(email) && quizService.isQuizInDataBase(quizName)) {
@@ -150,16 +176,6 @@ public class QuizController {
         return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/theMostPopularQuizzes")
-    public ResponseEntity listOfMostPopularQuizzes(){
-        List<ChartEntry> quizList = quizService.getListOfMostPopularQuizzes();
-        if (quizList.isEmpty()) {
-            logger.info("There isn't any quiz in database {}.");
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
-        }
-        logger.info("List of quiz {}.", quizList);
-        return new ResponseEntity<>(quizList, HttpStatus.OK);
 
-    }
 }
 

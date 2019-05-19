@@ -99,10 +99,8 @@ public class AuthorService {
         authorEntity.setSurname(author.getSurname());
         authorEntity.setEmail(author.getEmail());
         authorEntity.setQuizListSize(author.getQuizListSize());
-
         authorEntity.getQuizEntityList()
                 .add(mappingService.map(author.getQuizList().get(author.getQuizList().size() - 1)));
-
         authorRepository.save(authorEntity);
         return author;
     }
@@ -110,7 +108,7 @@ public class AuthorService {
     public Author addQuizToGivenAuthor(Author author, Quiz quiz) {
         quiz.setSizeOfQuestionList(quiz.getQuestionsList().size());
         author.getQuizList().add(quiz);
-        author.setQuizListSize(author.getQuizListSize() + 1);
+        author.setQuizListSize(author.getQuizListSize());
         return author;
     }
 
