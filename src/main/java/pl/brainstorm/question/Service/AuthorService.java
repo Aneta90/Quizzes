@@ -3,8 +3,11 @@ package pl.brainstorm.question.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.brainstorm.question.Domain.Entities.AuthorEntity;
+import pl.brainstorm.question.Domain.Entities.QuizEntity;
 import pl.brainstorm.question.Domain.Repositories.AuthorRepository;
 import pl.brainstorm.question.Models.Author;
+import pl.brainstorm.question.Models.AuthorChart;
+import pl.brainstorm.question.Models.ChartEntry;
 import pl.brainstorm.question.Models.Quiz;
 
 import javax.transaction.Transactional;
@@ -93,7 +96,7 @@ public class AuthorService {
     }
 
     @Transactional
-    public Author editAuthor(Author author) { //id author and quiz
+    public Author editAuthor(Author author) {
         AuthorEntity authorEntity = authorRepository.findByEmail(author.getEmail());
 
         authorEntity.setName(author.getName());
@@ -122,10 +125,16 @@ public class AuthorService {
         return author;
     }
 
-    public List<Integer> theMostPopularAuthors(){
+    public List<AuthorChart> theMostPopularAuthors(){
 
-        List<Integer> authorEntityListBySize = authorRepository.findAllByQuizEntityListOOrderByQuizListSize();
-        return authorEntityListBySize.stream().limit(5).collect(Collectors.toList());
+        List<AuthorEntity> authorEntityList = authorRepository.findAllByQuizEntityListOOrderByQuizListSize();
+        List<Author> authorList = new ArrayList<>();
+        for (AuthorEntity authorEntity : authorEntityList) {
+            authorList.add(mappingService.map(authorEntity));
+        }
 
+        return authorList.stream().limit(5)
+                .map(author -> new AuthorChart(author.getName(), author.getQuizList().size()))
+                .collect(Collectors.toList());
     }
 }
