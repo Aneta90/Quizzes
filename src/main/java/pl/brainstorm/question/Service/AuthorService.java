@@ -3,15 +3,12 @@ package pl.brainstorm.question.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.brainstorm.question.Domain.Entities.AuthorEntity;
-import pl.brainstorm.question.Domain.Entities.QuizEntity;
 import pl.brainstorm.question.Domain.Repositories.AuthorRepository;
 import pl.brainstorm.question.Models.Author;
-import pl.brainstorm.question.Models.Question;
 import pl.brainstorm.question.Models.Quiz;
 
-
+import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -95,26 +92,24 @@ public class AuthorService {
         return authorRepository.existsById(authorEntity.getId());
     }
 
-    public Author editAuthor(Author author) {
+    @Transactional
+    public Author editAuthor(Author author) { //id author and quiz
         AuthorEntity authorEntity = authorRepository.findByEmail(author.getEmail());
 
         authorEntity.setName(author.getName());
         authorEntity.setSurname(author.getSurname());
         authorEntity.setEmail(author.getEmail());
         authorEntity.setQuizListSize(author.getQuizListSize());
-        List<QuizEntity> quizEntityList = new ArrayList<>();
-        for (int i = 0; i < author.getQuizList().size(); i++) {
-            quizEntityList.add(mappingService.map(author.getQuizList().get(i)));
-        }
-        authorEntity.setQuizEntityList(quizEntityList);
+        authorEntity.getQuizEntityList()
+                .add(mappingService.map(author.getQuizList().get(author.getQuizList().size() - 1)));
         authorRepository.save(authorEntity);
         return author;
     }
 
     public Author addQuizToGivenAuthor(Author author, Quiz quiz) {
-        quiz.setSizeOfQuestionList(0);
+        quiz.setSizeOfQuestionList(quiz.getQuestionsList().size());
         author.getQuizList().add(quiz);
-        author.setQuizListSize(author.getQuizListSize()+1);
+        author.setQuizListSize(author.getQuizListSize());
         return author;
     }
 
