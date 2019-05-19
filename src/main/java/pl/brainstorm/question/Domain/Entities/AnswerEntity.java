@@ -1,7 +1,5 @@
 package pl.brainstorm.question.Domain.Entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.io.Serializable;
 

@@ -128,8 +128,7 @@ public class QuizService {
 
         Long tempToCalcScore = 0L;
         for (int i = 0; i < quiz.getQuestionsList().size(); i++) {
-            tempToCalcScore += questionService.calculateTotalScoreInQuestion(quiz.getQuestionsList().get(i),
-                    quizEntity.getId());
+            tempToCalcScore += questionService.calculateTotalScoreInQuestion(quizEntity.getQuestionsList().get(i));
         }
         List<Long> listOfTotalScore = quizEntity.getTotalScore();
         listOfTotalScore.add(tempToCalcScore);
