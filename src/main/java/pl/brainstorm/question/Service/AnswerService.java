@@ -31,14 +31,14 @@ public class AnswerService {
 
     Long calculateTotalScoreInAnswer(Answer answer, Long quizId) {
         long temp = 0L;
-            if (answer.getACorrect() && answer.getAnswerFromUser().equals("A")) {
-                temp += 1L;
-            } else if (answer.getBCorrect() && answer.getAnswerFromUser().equals("B")) {
-                temp += 1L;
-            } else if (answer.getCCorrect() && answer.getAnswerFromUser().equals("C")) {
-                temp += 1L;
-            } else if (answer.getDCorrect() && answer.getAnswerFromUser().equals("D")) {
-                temp += 1L;
+        if (answer.isaCorrect() && answer.getAnswerFromUser().equals("A")) {
+            temp += 1L;
+        } else if (answer.isbCorrect() && answer.getAnswerFromUser().equals("B")) {
+            temp += 1L;
+        } else if (answer.iscCorrect() && answer.getAnswerFromUser().equals("C")) {
+            temp += 1L;
+        } else if (answer.isdCorrect() && answer.getAnswerFromUser().equals("D")) {
+            temp += 1L;
         }
         return temp;
     }

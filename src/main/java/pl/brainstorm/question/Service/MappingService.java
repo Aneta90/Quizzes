@@ -98,10 +98,10 @@ public class MappingService {
         answer.setAnswerB(answerEntity.getAnswerB());
         answer.setAnswerC(answerEntity.getAnswerC());
         answer.setAnswerD(answerEntity.getAnswerD());
-        answer.setACorrect(answerEntity.getaCorrect());
-        answer.setBCorrect(answerEntity.getBCorrect());
-        answer.setCCorrect(answerEntity.getCCorrect());
-        answer.setDCorrect(answerEntity.getDCorrect());
+        answer.setaCorrect(answerEntity.isaCorrect());
+        answer.setbCorrect(answerEntity.isbCorrect());
+        answer.setcCorrect(answerEntity.iscCorrect());
+        answer.setdCorrect(answerEntity.isdCorrect());
         answer.setAnswerFromUser(answerEntity.getAnswerFromUser());
         return answer;
     }
@@ -110,13 +110,13 @@ public class MappingService {
 
         AnswerEntity answerEntity = new AnswerEntity();
         answerEntity.setAnswerA(answer.getAnswerA());
-        answerEntity.setaCorrect(answer.getACorrect());
+        answerEntity.setaCorrect(answer.isaCorrect());
         answerEntity.setAnswerB(answer.getAnswerB());
-        answerEntity.setBCorrect(answer.getBCorrect());
+        answerEntity.setbCorrect(answer.isbCorrect());
         answerEntity.setAnswerC(answer.getAnswerC());
-        answerEntity.setCCorrect(answer.getCCorrect());
+        answerEntity.setcCorrect(answer.iscCorrect());
         answerEntity.setAnswerD(answer.getAnswerD());
-        answerEntity.setDCorrect(answer.getDCorrect());
+        answerEntity.setdCorrect(answer.isdCorrect());
         answerEntity.setAnswerFromUser(answer.getAnswerFromUser());
         return answerEntity;
     }

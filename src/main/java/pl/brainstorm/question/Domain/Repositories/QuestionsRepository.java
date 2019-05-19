@@ -15,5 +15,4 @@ public interface QuestionsRepository extends JpaRepository<QuestionsEntity, Long
     @Query("Select q.questionsList from QuizEntity q where q.name = ?1")
     List<QuestionsEntity> findAllQuestionsByQuizName (String name);
 
-
 }

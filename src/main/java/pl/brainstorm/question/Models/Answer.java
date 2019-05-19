@@ -8,9 +8,9 @@ public class Answer {
     private String answerD;
 
     private boolean aCorrect;
-    private boolean isBCorrect;
-    private boolean isCCorrect;
-    private boolean isDCorrect;
+    private boolean bCorrect;
+    private boolean cCorrect;
+    private boolean dCorrect;
 
     private String answerFromUser;
 
@@ -26,9 +26,9 @@ public class Answer {
         this.answerC = answerC;
         this.answerD = answerD;
         this.aCorrect = isACorrect;
-        this.isBCorrect = isBCorrect;
-        this.isCCorrect = isCCorrect;
-        this.isDCorrect = isDCorrect;
+        this.bCorrect = isBCorrect;
+        this.cCorrect = isCCorrect;
+        this.dCorrect = isDCorrect;
         this.answerFromUser = answerFromUser;
     }
 
@@ -64,36 +64,36 @@ public class Answer {
         this.answerD = answerD;
     }
 
-    public boolean getACorrect() {
+    public boolean isaCorrect() {
         return aCorrect;
     }
 
-    public void setACorrect(boolean ACorrect) {
-        aCorrect = ACorrect;
+    public void setaCorrect(boolean aCorrect) {
+        this.aCorrect = aCorrect;
     }
 
-    public boolean getBCorrect() {
-        return isBCorrect;
+    public boolean isbCorrect() {
+        return bCorrect;
     }
 
-    public void setBCorrect(boolean BCorrect) {
-        isBCorrect = BCorrect;
+    public void setbCorrect(boolean bCorrect) {
+        this.bCorrect = bCorrect;
     }
 
-    public boolean getCCorrect() {
-        return isCCorrect;
+    public boolean iscCorrect() {
+        return cCorrect;
     }
 
-    public void setCCorrect(boolean CCorrect) {
-        isCCorrect = CCorrect;
+    public void setcCorrect(boolean cCorrect) {
+        this.cCorrect = cCorrect;
     }
 
-    public boolean getDCorrect() {
-        return isDCorrect;
+    public boolean isdCorrect() {
+        return dCorrect;
     }
 
-    public void setDCorrect(boolean DCorrect) {
-        isDCorrect = DCorrect;
+    public void setdCorrect(boolean dCorrect) {
+        this.dCorrect = dCorrect;
     }
 
     public String getAnswerFromUser() {
@@ -112,9 +112,9 @@ public class Answer {
                 ", answerC='" + answerC + '\'' +
                 ", answerD='" + answerD + '\'' +
                 ", aCorrect=" + aCorrect +
-                ", isBCorrect=" + isBCorrect +
-                ", isCCorrect=" + isCCorrect +
-                ", isDCorrect=" + isDCorrect +
+                ", bCorrect=" + bCorrect +
+                ", cCorrect=" + cCorrect +
+                ", dCorrect=" + dCorrect +
                 ", answerFromUser='" + answerFromUser + '\'' +
                 '}';
     }
