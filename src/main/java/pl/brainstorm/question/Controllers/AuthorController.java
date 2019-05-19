@@ -117,7 +117,6 @@ public class AuthorController {
         logger.info("Founding Author with email {}.", email);
         return new ResponseEntity(HttpStatus.OK);
     }
-
     @GetMapping("/theMostPopularAuthors")
     ResponseEntity listOfMostPopularQuizzes(){
         List<AuthorChart> quizList = authorService.theMostPopularAuthors();
