@@ -14,6 +14,6 @@ public interface AuthorRepository extends JpaRepository<AuthorEntity, Long> {
     AuthorEntity findByEmail(String email);
     List <AuthorEntity> findAllByQuizListSizeLessThanEqual(int sizeOfList);
     List <AuthorEntity> findAllByQuizListSizeGreaterThanEqual(int sizeOfList);
-    @Query("select a from AuthorEntity a WHERE a.quizListSize order by a.quizListSize")
+    @Query("select a from AuthorEntity a WHERE a.quizListSize>0 order by a.quizListSize")
     List <AuthorEntity> findAllByQuizEntityListOOrderByQuizListSize();
 }

@@ -112,7 +112,7 @@ public class AuthorService {
     public Author addQuizToGivenAuthor(Author author, Quiz quiz) {
         quiz.setSizeOfQuestionList(quiz.getQuestionsList().size());
         author.getQuizList().add(quiz);
-        author.setQuizListSize(author.getQuizListSize());
+        author.setQuizListSize((long) author.getQuizList().size());
         return author;
     }
 
@@ -125,7 +125,7 @@ public class AuthorService {
         return author;
     }
 
-    public List<AuthorChart> theMostPopularAuthors(){
+    public List<AuthorChart> theMostPopularAuthors() {
 
         List<AuthorEntity> authorEntityList = authorRepository.findAllByQuizEntityListOOrderByQuizListSize();
         List<Author> authorList = new ArrayList<>();

@@ -9,8 +9,6 @@ import pl.brainstorm.question.Models.Quiz;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 public class MappingServiceTest {
 
 
@@ -28,10 +26,10 @@ public class MappingServiceTest {
         answer.setAnswerB("B");
         answer.setAnswerC("C");
         answer.setAnswerD("D");
-        answer.setACorrect(true);
-        answer.setBCorrect(false);
-        answer.setCCorrect(false);
-        answer.setDCorrect(false);
+        answer.setaCorrect(true);
+        answer.setbCorrect(false);
+        answer.setcCorrect(false);
+        answer.setdCorrect(false);
 //        AnswerEntity answerEntity = mappingService.map(answer);
 //        assertNotNull(answerEntity.getId());
     }

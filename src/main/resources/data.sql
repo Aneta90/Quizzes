@@ -4,7 +4,7 @@ CREATE TABLE answers (
                       answerB VARCHAR(255),
                       answerC VARCHAR(255),
                       answerD VARCHAR(255),
-                      aCorrect BOOLEAN,
+                      isaCorrect BOOLEAN,
                       isBCorrect BOOLEAN,
                       isCCorrect BOOLEAN,
                       isDCorrect BOOLEAN,

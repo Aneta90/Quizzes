@@ -16,27 +16,26 @@ public class AnswerEntity implements Serializable {
     private String answerC;
     private String answerD;
 
-    private Boolean aCorrect;
-    private Boolean isBCorrect;
-    private Boolean isCCorrect;
-    private Boolean isDCorrect;
+    private boolean aCorrect;
+    private boolean bCorrect;
+    private boolean cCorrect;
+    private boolean dCorrect;
 
     private String answerFromUser;
 
     public AnswerEntity() {
     }
 
-    public AnswerEntity(String answerA, String answerB, String answerC,
-                        String answerD, Boolean ACorrect, Boolean isBCorrect,
-                        Boolean isCCorrect, Boolean isDCorrect, String answerFromUser) {
+    public AnswerEntity(String answerA, String answerB, String answerC, String answerD, boolean aCorrect,
+                        boolean bCorrect, boolean cCorrect, boolean dCorrect, String answerFromUser) {
         this.answerA = answerA;
         this.answerB = answerB;
         this.answerC = answerC;
         this.answerD = answerD;
-        this.aCorrect = ACorrect;
-        this.isBCorrect = isBCorrect;
-        this.isCCorrect = isCCorrect;
-        this.isDCorrect = isDCorrect;
+        this.aCorrect = aCorrect;
+        this.bCorrect = bCorrect;
+        this.cCorrect = cCorrect;
+        this.dCorrect = dCorrect;
         this.answerFromUser = answerFromUser;
     }
 
@@ -80,36 +79,36 @@ public class AnswerEntity implements Serializable {
         this.answerD = answerD;
     }
 
-    public Boolean getaCorrect() {
+    public boolean isaCorrect() {
         return aCorrect;
     }
 
-    public void setaCorrect(Boolean aCorrect) {
+    public void setaCorrect(boolean aCorrect) {
         this.aCorrect = aCorrect;
     }
 
-    public Boolean getBCorrect() {
-        return isBCorrect;
+    public boolean isbCorrect() {
+        return bCorrect;
     }
 
-    public void setBCorrect(Boolean BCorrect) {
-        isBCorrect = BCorrect;
+    public void setbCorrect(boolean bCorrect) {
+        this.bCorrect = bCorrect;
     }
 
-    public Boolean getCCorrect() {
-        return isCCorrect;
+    public boolean iscCorrect() {
+        return cCorrect;
     }
 
-    public void setCCorrect(Boolean CCorrect) {
-        isCCorrect = CCorrect;
+    public void setcCorrect(boolean cCorrect) {
+        this.cCorrect = cCorrect;
     }
 
-    public Boolean getDCorrect() {
-        return isDCorrect;
+    public boolean isdCorrect() {
+        return dCorrect;
     }
 
-    public void setDCorrect(Boolean DCorrect) {
-        isDCorrect = DCorrect;
+    public void setdCorrect(boolean dCorrect) {
+        this.dCorrect = dCorrect;
     }
 
     public String getAnswerFromUser() {
@@ -129,9 +128,9 @@ public class AnswerEntity implements Serializable {
                 ", answerC='" + answerC + '\'' +
                 ", answerD='" + answerD + '\'' +
                 ", aCorrect=" + aCorrect +
-                ", isBCorrect=" + isBCorrect +
-                ", isCCorrect=" + isCCorrect +
-                ", isDCorrect=" + isDCorrect +
+                ", bCorrect=" + bCorrect +
+                ", cCorrect=" + cCorrect +
+                ", dCorrect=" + dCorrect +
                 ", answerFromUser='" + answerFromUser + '\'' +
                 '}';
     }

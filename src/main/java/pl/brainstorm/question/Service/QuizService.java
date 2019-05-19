@@ -122,13 +122,14 @@ public class QuizService {
 
     public Long calculateTotalScore(Quiz quiz) {
         QuizEntity quizEntity = quizRepository.findByName(quiz.getName());
-        if (quizEntity.getId() == null) {
+        if (quizEntity == null) {
             return null;
         }
 
         Long tempToCalcScore = 0L;
         for (int i = 0; i < quiz.getQuestionsList().size(); i++) {
-            tempToCalcScore += questionService.calculateTotalScoreInQuestion(quiz.getQuestionsList().get(i), quizEntity.getId());
+            tempToCalcScore += questionService.calculateTotalScoreInQuestion(quiz.getQuestionsList().get(i),
+                    quizEntity.getId());
         }
         List<Long> listOfTotalScore = quizEntity.getTotalScore();
         listOfTotalScore.add(tempToCalcScore);
