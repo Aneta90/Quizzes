@@ -6,10 +6,7 @@ import pl.brainstorm.question.Domain.Entities.AnswerEntity;
 import pl.brainstorm.question.Domain.Entities.AuthorEntity;
 import pl.brainstorm.question.Domain.Entities.QuestionsEntity;
 import pl.brainstorm.question.Domain.Entities.QuizEntity;
-import pl.brainstorm.question.Models.Answer;
-import pl.brainstorm.question.Models.Author;
-import pl.brainstorm.question.Models.Question;
-import pl.brainstorm.question.Models.Quiz;
+import pl.brainstorm.question.Models.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +69,6 @@ public class MappingService {
             questionList.add(map(quizEntity.getQuestionsList().get(i)));
         }
         quiz.setQuestionsList(questionList);
-
         return quiz;
     }
 
@@ -120,4 +116,5 @@ public class MappingService {
         answerEntity.setAnswerFromUser(answer.getAnswerFromUser());
         return answerEntity;
     }
+
 }

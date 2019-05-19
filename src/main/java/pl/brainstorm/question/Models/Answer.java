@@ -1,5 +1,8 @@
 package pl.brainstorm.question.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Answer {
 
     private String answerA;
@@ -63,7 +66,7 @@ public class Answer {
     public void setAnswerD(String answerD) {
         this.answerD = answerD;
     }
-
+    @JsonIgnore
     public boolean isaCorrect() {
         return aCorrect;
     }
@@ -71,7 +74,7 @@ public class Answer {
     public void setaCorrect(boolean aCorrect) {
         this.aCorrect = aCorrect;
     }
-
+    @JsonIgnore
     public boolean isbCorrect() {
         return bCorrect;
     }
@@ -79,7 +82,7 @@ public class Answer {
     public void setbCorrect(boolean bCorrect) {
         this.bCorrect = bCorrect;
     }
-
+    @JsonIgnore
     public boolean iscCorrect() {
         return cCorrect;
     }
@@ -87,7 +90,7 @@ public class Answer {
     public void setcCorrect(boolean cCorrect) {
         this.cCorrect = cCorrect;
     }
-
+    @JsonIgnore
     public boolean isdCorrect() {
         return dCorrect;
     }
