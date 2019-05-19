@@ -13,6 +13,7 @@ import pl.brainstorm.question.Models.Quiz;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AuthorService {
@@ -124,5 +125,12 @@ public class AuthorService {
             }
         }
         return author;
+    }
+
+    public List<Integer> theMostPopularAuthors(){
+
+        List<Integer> authorEntityListBySize = authorRepository.findAllByQuizEntityListOOrderByQuizListSize();
+        return authorEntityListBySize.stream().limit(5).collect(Collectors.toList());
+
     }
 }

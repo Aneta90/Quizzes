@@ -116,4 +116,16 @@ public class AuthorController {
         logger.info("Founding Author with email {}.", email);
         return new ResponseEntity(HttpStatus.OK);
     }
+
+    @GetMapping("/theMostPopularAuthors")
+    public ResponseEntity listOfMostPopularQuizzes(){
+        List<Integer> quizList = authorService.theMostPopularAuthors();
+        if (quizList.isEmpty()) {
+            logger.info("There isn't any author in database {}.");
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+        logger.info("List of authors {}.", quizList);
+        return new ResponseEntity<>(quizList, HttpStatus.OK);
+
+    }
 }
