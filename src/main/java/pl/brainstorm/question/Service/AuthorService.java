@@ -3,11 +3,9 @@ package pl.brainstorm.question.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.brainstorm.question.Domain.Entities.AuthorEntity;
-import pl.brainstorm.question.Domain.Entities.QuizEntity;
 import pl.brainstorm.question.Domain.Repositories.AuthorRepository;
 import pl.brainstorm.question.Models.Author;
 import pl.brainstorm.question.Models.AuthorChart;
-import pl.brainstorm.question.Models.ChartEntry;
 import pl.brainstorm.question.Models.Quiz;
 
 import javax.transaction.Transactional;
