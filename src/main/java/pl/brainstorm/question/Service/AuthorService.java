@@ -112,7 +112,7 @@ public class AuthorService {
     public Author addQuizToGivenAuthor(Author author, Quiz quiz) {
         quiz.setSizeOfQuestionList(quiz.getQuestionsList().size());
         author.getQuizList().add(quiz);
-        author.setQuizListSize((long) author.getQuizList().size());
+        author.setQuizListSize(author.getQuizList().size());
         return author;
     }
 

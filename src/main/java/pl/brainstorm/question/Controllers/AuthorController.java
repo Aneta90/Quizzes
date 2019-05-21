@@ -49,7 +49,7 @@ public class AuthorController {
     @PostMapping("/add")
     ResponseEntity saveAuthor(@RequestBody Author author) {
         logger.info("Adding new Author : {}", author);
-        if (authorService.isAuthorInDatabase(author)) { // check by email
+        if (authorService.isAuthorInDatabase(author)) {
             logger.info("There is Author : {} in database.", author);
             Author authorFromDatabase = authorService.getAuthorByEmail(author.getEmail());
             return new ResponseEntity<>(authorFromDatabase, HttpStatus.OK);
@@ -108,7 +108,7 @@ public class AuthorController {
 
     @GetMapping("/isAuthorPresent/{email}")
     ResponseEntity isAuthorInDatabase(@PathVariable String email) {
-        logger.info("Checking is author with email {}, is in database", email);
+        logger.info("Checking if author with email {}, is in database", email);
         boolean isInDatabase = authorService.isAuthorWithEmailInDatabase(email);
         if (!isInDatabase) {
             logger.info("There isn't Author with email {}.", email);

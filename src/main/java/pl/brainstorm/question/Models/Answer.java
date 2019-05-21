@@ -70,7 +70,7 @@ public class Answer {
     public boolean isaCorrect() {
         return aCorrect;
     }
-
+    @JsonProperty
     public void setaCorrect(boolean aCorrect) {
         this.aCorrect = aCorrect;
     }
@@ -78,7 +78,7 @@ public class Answer {
     public boolean isbCorrect() {
         return bCorrect;
     }
-
+    @JsonProperty
     public void setbCorrect(boolean bCorrect) {
         this.bCorrect = bCorrect;
     }
@@ -86,7 +86,7 @@ public class Answer {
     public boolean iscCorrect() {
         return cCorrect;
     }
-
+    @JsonProperty
     public void setcCorrect(boolean cCorrect) {
         this.cCorrect = cCorrect;
     }
@@ -94,7 +94,7 @@ public class Answer {
     public boolean isdCorrect() {
         return dCorrect;
     }
-
+    @JsonProperty
     public void setdCorrect(boolean dCorrect) {
         this.dCorrect = dCorrect;
     }

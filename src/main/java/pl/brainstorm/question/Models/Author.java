@@ -8,12 +8,12 @@ public class Author {
     private String surname;
     private String email;
     private List<Quiz> quizList;
-    private Long quizListSize;
+    private Integer quizListSize;
 
     public Author() {
     }
 
-    public Author(String name, String surname, String email, List<Quiz> quizList, Long quizListSize) {
+    public Author(String name, String surname, String email, List<Quiz> quizList, Integer quizListSize) {
         this.name = name;
         this.surname = surname;
         this.email = email;
@@ -53,11 +53,11 @@ public class Author {
         this.quizList = quizList;
     }
 
-    public Long getQuizListSize() {
+    public Integer getQuizListSize() {
         return quizListSize;
     }
 
-    public void setQuizListSize(Long quizListSize) {
+    public void setQuizListSize(Integer quizListSize) {
         this.quizListSize = quizListSize;
     }
 
