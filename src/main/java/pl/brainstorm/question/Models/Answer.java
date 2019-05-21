@@ -66,34 +66,42 @@ public class Answer {
     public void setAnswerD(String answerD) {
         this.answerD = answerD;
     }
+
     @JsonIgnore
     public boolean isaCorrect() {
         return aCorrect;
     }
+
     @JsonProperty
     public void setaCorrect(boolean aCorrect) {
         this.aCorrect = aCorrect;
     }
+
     @JsonIgnore
     public boolean isbCorrect() {
         return bCorrect;
     }
+
     @JsonProperty
     public void setbCorrect(boolean bCorrect) {
         this.bCorrect = bCorrect;
     }
+
     @JsonIgnore
     public boolean iscCorrect() {
         return cCorrect;
     }
+
     @JsonProperty
     public void setcCorrect(boolean cCorrect) {
         this.cCorrect = cCorrect;
     }
+
     @JsonIgnore
     public boolean isdCorrect() {
         return dCorrect;
     }
+
     @JsonProperty
     public void setdCorrect(boolean dCorrect) {
         this.dCorrect = dCorrect;

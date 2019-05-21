@@ -29,7 +29,7 @@ public class AnswerService {
         return answerRepository.existsById(answerEntity.getId());
     }
 
-    Long calculateTotalScoreInAnswer(Answer answer, Long quizId) {
+    Long calculateTotalScoreInAnswer(AnswerEntity answer) {
         long temp = 0L;
         if (answer.isaCorrect() && answer.getAnswerFromUser().equals("A")) {
             temp += 1L;
@@ -42,7 +42,6 @@ public class AnswerService {
         }
         return temp;
     }
-
 
 }
 
