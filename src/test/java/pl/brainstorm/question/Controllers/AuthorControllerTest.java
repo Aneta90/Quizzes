@@ -110,8 +110,6 @@ public class AuthorControllerTest {
         quizEntityList.add(quizEntity);
         quizEntityList.add(quizEntity2);
 
-        System.out.println("QuizEntityListSize:" + quizEntityList.size());
-
         authorEntity.setName("Anett");
         authorEntity.setEmail("aw22@onet.pl");
         authorEntity.setSurname("Wrobel");
@@ -120,7 +118,6 @@ public class AuthorControllerTest {
         authorId = authorEntity.getId();
 
         authorRepository.save(authorEntity);
-
 
     }
 
