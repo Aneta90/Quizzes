@@ -73,7 +73,7 @@ public class QuizService {
         return quizList;
     }
 
-    public List<ChartEntry> getListOfMostPopularQuizzes() { //chart zwraca listę 5 najbardziej popularnych quizow
+    public List<ChartEntry> getListOfMostPopularQuizzes() {
 
         List<QuizEntity> quizEntityList = quizRepository.findAllOrderByNumberOfSolved();
         List<Quiz> quizList = new ArrayList<>();

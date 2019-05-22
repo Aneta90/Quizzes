@@ -31,7 +31,7 @@ class QuizController {
         this.authorService = authorService;
     }
 
-    //GetMethod
+
     @GetMapping("/getListOfQuiz")
     ResponseEntity getListOfQuizzes() {
         List<Quiz> quizList = quizService.getListOfQuizzes();
@@ -122,7 +122,6 @@ class QuizController {
     }
 
 
-    //PostMethod
     @PostMapping("/addQuiz/{email}")
     ResponseEntity addQuizToAuthorWithGivenEmail(@RequestBody Quiz quiz, @PathVariable String email) {
         if (quizService.isQuizInDataBase(quiz.getName())) {
@@ -147,7 +146,6 @@ class QuizController {
         return new ResponseEntity<>(totalScore, HttpStatus.OK);
     }
 
-    //PutMethod
     @PutMapping("/editQuiz/email/{email}/quiz/{quizName}")
     ResponseEntity editQuiz(@RequestBody Question question, @PathVariable String email, @PathVariable String quizName) {
         if (authorService.isAuthorInDatabase(email)) {
@@ -162,7 +160,7 @@ class QuizController {
         }
     }
 
-    //DeleteMethod
+
     @DeleteMapping("/editQuiz/email/{email}/quiz/{quizName}")
     ResponseEntity deleteQuizWithGivenNameInGivenAuthor(@PathVariable String email, @PathVariable String quizName) {
         if (authorService.isAuthorInDatabase(email) && quizService.isQuizInDataBase(quizName)) {
