@@ -161,7 +161,7 @@ class QuizController {
     }
 
 
-    @DeleteMapping("/editQuiz/email/{email}/quiz/{quizName}")
+    @DeleteMapping("/deleteQuiz/email/{email}/quiz/{quizName}")
     ResponseEntity deleteQuizWithGivenNameInGivenAuthor(@PathVariable String email, @PathVariable String quizName) {
         if (authorService.isAuthorInDatabase(email) && quizService.isQuizInDataBase(quizName)) {
             Quiz quiz = quizService.getSingleQuizWithGivenName(quizName);

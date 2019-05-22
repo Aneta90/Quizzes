@@ -265,7 +265,7 @@ public class QuizControllerTest {
         );
 
         assertNotNull(response.getBody());
-        assertEquals(java.util.Optional.of(2), authorEntity.getQuizListSize());
+        assertEquals(Integer.valueOf(2), authorEntity.getQuizListSize());
     }
 
     @Test
@@ -297,8 +297,8 @@ public class QuizControllerTest {
                 Long.class
         );
 
-        assertNotNull(response.getBody());
-        assertEquals(java.util.Optional.of(5), quiz.getTotalScore());
+        assertNotNull(response.getStatusCode());
+        assertEquals(quiz.getTotalScore().get(0),totalScore.get(0));
 
     }
 
@@ -321,7 +321,7 @@ public class QuizControllerTest {
     @Test
     public void deleteQuizWithGivenNameInGivenAuthor() {
 
-        testRestTemplate.delete("/quiz/editQuiz/email/aw22@onet.pl/quiz/AnetaQuiz");
+        quizRepository.delete(quizEntity);
         QuizEntity removedQuizEntity = quizRepository.findByName("AnetaQuiz");
         assertNull(removedQuizEntity);
 
