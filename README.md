@@ -1,5 +1,5 @@
 # Quizzes
-Quizzes - check your knowledge about Java !
+Quizzes - check your knowledge about Java !!
 
 Project is still being developed. Check out on: https://brainstormquizzes.herokuapp.com/#/
 
